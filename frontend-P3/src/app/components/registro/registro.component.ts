@@ -30,6 +30,46 @@ export class RegistroComponent implements OnInit {
 
   error = false;
 
+  username: string = "";
+  correo: string = "";
+  clave: string = "";
+  nombre: string = "";
+  apellidos: string = "";
+  cui: string = "";
+  edad: number;
+  id_tipo:number;
+
+  userNameCorrecto(username: string)
+  {
+    const expresion = /[A-Z]+/;
+    const expresion1= /[a-z]+/;
+    const expresion2= /[0-9]+/;
+    const expresion3= /[?^_-]+/;
+
+    if(username.length >= 4 && username.length <=15)
+    {
+      return 'Cumple con el rango'
+    }
+    else
+    {
+      return 'No cumple con el rango';
+    }
+  }
+
+  
+  dpiCorrecto(cui: string):boolean
+  {
+    if(cui.length == 13)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
   registrar()
   {
 

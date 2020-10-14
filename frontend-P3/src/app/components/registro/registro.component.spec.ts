@@ -52,6 +52,30 @@ describe('RegistroComponent', () => {
 
   });
 
+  describe('TDD PARA CUI', () => {
+    it('Comprobacion de CUI correcto', function () {
+      expect(component.dpiCorrecto('1234567891023')).toBeTruthy();
+    });
+
+    it('Comprobacion de CUI incorrecto', function () {
+      expect(component.dpiCorrecto('123456789102')).toBeFalsy();
+    });
+
+    it('Comprobacion de CUI vacio', function () {
+      expect(component.dpiCorrecto('')).toBeFalsy();
+    });
+
+  });
+
+  describe('TDD PARA USERNAME', () => {
+    it('Comprobacion de username correcto', function () {
+      expect(component.userNameCorrecto('astrid_14')).toContain('Cumple con el rango');
+    });
+
+    it('Comprobacion de username no correcto', function () {
+      expect(component.userNameCorrecto('astrid1234567890')).toContain('No cumple con el rango');
+    });
+  });
 
 });
 
