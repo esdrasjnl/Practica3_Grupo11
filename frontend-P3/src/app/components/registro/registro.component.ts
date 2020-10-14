@@ -41,19 +41,12 @@ export class RegistroComponent implements OnInit {
 
   userNameCorrecto(username: string)
   {
-    const expresion = /[A-Z]+/;
-    const expresion1= /[a-z]+/;
-    const expresion2= /[0-9]+/;
-    const expresion3= /[?^_-]+/;
-
     if(username.length >= 4 && username.length <=15)
     {
       return 'Cumple con el rango'
     }
-    else
-    {
-      return 'No cumple con el rango';
-    }
+    
+    return 'No cumple con el rango';
   }
 
   
@@ -63,10 +56,18 @@ export class RegistroComponent implements OnInit {
     {
       return true;
     }
-    else
+    return false;
+  }
+
+  correoCorrecto(correo: string)
+  {
+    const exp = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+
+    if(exp.test(correo))
     {
-      return false;
+      return true;
     }
+    return false;
   }
 
 
