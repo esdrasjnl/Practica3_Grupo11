@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test nodemon --exec 'mocha --R min'",
+    "test-cuc": "cucumber-js",
     "dev": "nodemon backend/index.js"
   },
   "keywords": [],
@@ -20,6 +21,7 @@
     "supertest": "^4.0.2"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^7.0.0-rc.0",
     "nodemon": "^2.0.5"
   }
 }
