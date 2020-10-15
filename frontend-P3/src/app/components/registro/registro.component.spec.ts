@@ -36,10 +36,10 @@ describe('RegistroComponent', () => {
         correo: '',
         clave: '',
         nombre: '',
-        apellidos: '',
+        apellido: '',
         cui: '',
         edad: '',
-        id_tipo: 1
+        ref_id_tipo: 1
       };
 
       var s = new RegistroComponent(component.service, component.router);
@@ -93,6 +93,15 @@ describe('RegistroComponent', () => {
     it('Comprobacion de correo incorrecto', function () {
       expect(component.correoCorrecto('')).toBeFalsy();
     });
+
+  });
+
+  describe('TDD PARA METODO REGISTRAR', () => {
+
+    it('Comprobacion de metodo registrar no se envia ningun dato', function () {
+      expect(component.registrar()).toBeFalsy();
+    });
+
 
   });
 

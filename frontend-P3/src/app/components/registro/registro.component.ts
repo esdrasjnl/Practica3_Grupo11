@@ -93,7 +93,7 @@ export class RegistroComponent implements OnInit {
           }
           else {
             alert("USUARIO NO SE PUEDE REGISTRAR, VUELVA A INTENTARLO!");
-            this.error = true;
+            this.error = false;
           }
           this.limpiar();
         },
