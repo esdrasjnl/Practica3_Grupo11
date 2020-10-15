@@ -2,6 +2,7 @@ const bodyparser = require('body-parser');
 var express = require('express')
 var http = require('http');
 var app = express();
+var mysqldb =require('./database');
 const PORT = process.env.PORT || 4000;
 
 app.use(bodyparser.json());
@@ -15,3 +16,8 @@ app.listen(PORT, ()=>{
 app.get('/', (req, res)=>{
     res.send('SAOP API');
 });
+
+app.use('/api/usuario/',require('./routes/usuario.router'));
+
+//Check connect
+mysqldb.connect();
