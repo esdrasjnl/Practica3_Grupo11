@@ -1,5 +1,5 @@
 Feature: Registro_Usuario
-  Everybody wants to know when it's Friday
+  Se utilizo para verificar que el registro sea exitoso
 
 Scenario: El invitado se registra llenando los datos de forma correcta
     Given El invitado esta en el formulario de registro
