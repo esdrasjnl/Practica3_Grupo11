@@ -22,10 +22,10 @@ export class RegistroComponent implements OnInit {
     correo: '',
     clave: '',
     nombre: '',
-    apellidos: '',
+    apellido: '',
     cui: '',
     edad: '',
-    id_tipo: 1
+    ref_id_tipo: 1
   };
 
   error = false;
@@ -36,8 +36,8 @@ export class RegistroComponent implements OnInit {
   nombre: string = "";
   apellidos: string = "";
   cui: string = "";
-  edad: number;
-  id_tipo:number;
+  edad: string;
+  id_tipo:number=1;
 
   userNameCorrecto(username: string)
   {
@@ -71,8 +71,46 @@ export class RegistroComponent implements OnInit {
   }
 
 
-  registrar()
-  {
+  registrar() {
 
+    this.datos.username = this.username;
+    this.datos.nombre = this.nombre;
+    this.datos.apellido = this.apellidos;
+    this.datos.cui = this.cui;
+    this.datos.clave = this.clave;
+    this.datos.edad=this.edad;
+    this.datos.correo=this.correo;
+    this.datos.ref_id_tipo=this.id_tipo;
+
+
+    console.log(this.datos);
+
+    this.service.postRegistro(this.datos)
+      .subscribe(
+        res => {
+          if (res!== "") {
+            alert("USUARIO REGISTRADO EXITOSAMENTE!");
+          }
+          else {
+            alert("USUARIO NO SE PUEDE REGISTRAR, VUELVA A INTENTARLO!");
+            this.error = true;
+          }
+          this.limpiar();
+        },
+        err => this.error = true
+      )
   }
+
+  limpiar() {
+    this.clave = '';
+    this.edad = '';
+    this.nombre = '';
+    this.apellidos = '';
+    this.cui = '';
+    this.clave = '';
+  }
+
+
+
+  
 }

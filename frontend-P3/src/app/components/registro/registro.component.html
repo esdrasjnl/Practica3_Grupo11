@@ -49,10 +49,10 @@
                     <div class="col-md-5 col-lg-5 col-xl-5" style=" margin-left:-50px;">
                         <!-- First name -->
                         <p class="h4 mb-1" style="font-size: 16px; font-weight: bold; color:white; margin-top: 10px;">
-                            CARNÉ:</p>
+                            USERNAME:</p>
                     </div>
                     <div class="col-md-5 col-lg-3 col-xl-3" style=" margin-left:-80px;">
-                        <input name="cajac" [(ngModel)]="carnet" type="text" id="defaultRegisterFormFirstName"
+                        <input name="cajac" [(ngModel)]="username" type="text" id="defaultRegisterFormFirstName"
                             class="form-control" placeholder="CARNÉ">
                     </div>
 
@@ -72,6 +72,16 @@
 
                 </div>
 
+                <div class="form-row mb-3">
+                    <div class="col-md-5 col-lg-5 col-xl-5" style=" margin-left:-90px;">
+                        <p class="h4 mb-4" style="font-size: 16px; font-weight: bold; color:white;  margin-top: 10px;">
+                            CORREO:</p>
+                    </div>
+                    <div class="col-md-5 col-lg-3 col-xl-3" style=" margin-left:-41px;">
+                        <input name="cajapas" [(ngModel)]="correo" type="text" id="defaultRegisterFormFirstName"
+                            class="form-control" placeholder="CORREO">
+                    </div>
+                </div>
 
                 <div class="form-row mb-3">
 
@@ -80,7 +90,7 @@
                             APELLIDOS:</p>
                     </div>
                     <div class="col-md-5 col-lg-3 col-xl-3" style=" margin-left:-80px;">
-                        <input [(ngModel)]="apellido" name="cajap" type="text" id="defaultRegisterFormFirstName"
+                        <input [(ngModel)]="apellidos" name="cajap" type="text" id="defaultRegisterFormFirstName"
                             class="form-control" placeholder="APELLIDO">
                     </div>
 
@@ -110,25 +120,17 @@
                             class="form-control" placeholder="CONTRASEÑA">
                     </div>
                 </div>
-
                 <div class="form-row mb-3">
                     <div class="col-md-5 col-lg-5 col-xl-5" style=" margin-left:-90px;">
                         <p class="h4 mb-4" style="font-size: 16px; font-weight: bold; color:white;  margin-top: 10px;">
-                            CARRERA:</p>
+                            EDAD:</p>
                     </div>
                     <div class="col-md-5 col-lg-3 col-xl-3" style=" margin-left:-41px;">
-                        <select name="cajacarrera" [(ngModel)]="carrera"
-                            class="browser-default custom-select custom-select-lg mb-1">
-                            <option value="001">Ciencias y Sistemas</option>
-                            <option value="002">Industrial</option>
-                            <option value="003">Mecanica Electrica</option>
-                            <option value="004">Quimica</option>
-                            <option value="005">Electronica</option>
-                            <option value="006">Mecanica Industrial</option>
-                            <option value="007">Ambiental</option>
-                        </select>
+                        <input name="cajapas" [(ngModel)]="edad" type="text" id="defaultRegisterFormFirstName"
+                            class="form-control" placeholder="EDAD">
                     </div>
                 </div>
+
                 <button type="submit" class="btn btn-primary" id="Registro" (click)="registrar()">REGISTRAR
                     USUARIO</button>
             </form>
