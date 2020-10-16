@@ -22,7 +22,13 @@ export class LoginComponent implements OnInit {
     clave:''
   };
 
+  datos1 = {
+    user_name:'' ,
+    clave:''
+  };
+
   email:string="";
+  user_name:string = "";
   clave:string="";
 
   correoCorrecto(correo: string)

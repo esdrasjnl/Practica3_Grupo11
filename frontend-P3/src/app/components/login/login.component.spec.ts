@@ -31,7 +31,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Verifica que los valores iniciales esten vacios', () => {
+  describe('Verifica que los valores iniciales esten vacios si inicia sesion con correo', () => {
     it('Se hace prueba verificando que los valores esten vacios', function () {
       const datos = {
         email: '',
@@ -49,6 +49,29 @@ describe('LoginComponent', () => {
       };
       var s = new LoginComponent(component.service, component.router);
       expect(component.datos).not.toEqual(datos);
+
+    });
+
+  });
+
+  describe('Verifica que los valores iniciales esten vacios si inicia sesion con username', () => {
+    it('Se hace prueba verificando que los valores esten vacios', function () {
+      const datos1 = {
+        user_name: '',
+        clave: ''
+      };
+      var s = new LoginComponent(component.service, component.router);
+      expect(component.datos1).toEqual(datos1);
+
+    });
+
+    it('Se hace prueba verificando que los valores iniciales no contengan datos', function () {
+      const datos1 = {
+        user_name: 'ejemplo',
+        clave: ''
+      };
+      var s = new LoginComponent(component.service, component.router);
+      expect(component.datos1).not.toEqual(datos1);
 
     });
 
