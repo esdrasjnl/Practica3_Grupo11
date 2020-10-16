@@ -124,5 +124,18 @@ describe("Express usuarios", async () => {
           done();
         }
       })
-    })
+    });
+    it("TestLoginCamposVacios request  /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"","clave":""})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
 });
