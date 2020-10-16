@@ -9,7 +9,7 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
         return res.json({ 'Msg': 'Faltan Datos' });
         //console.log(req.body.carnet);
     } else {
-        const validacion = `select count(*) as retorno from usuario where correo = '${req.body.correo}' and user_name = '${req.body.user_name}' and cui = ${cui}`;
+        const validacion = `select count(*) as retorno from usuario where correo = '${req.body.correo}' or user_name = '${req.body.user_name}' or cui = ${cui}`;
         //var existeDato = 0;
         mysqldb.connection.query(validacion, function (err, results) {
             if (err) {
