@@ -99,5 +99,31 @@ describe("Express usuarios", async () => {
         done();
       }
     })
+  });
+  it("TestObtenerusuarioDatavacio request GET /obtenerMiusuario",(done)=>{
+    request(app.use(usuarios))
+    .get("/obtenerMiUsuario")
+    .send({"correo":""})
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
+  it("TestDataIncorect request GET /obtenerMisuaurio",(done)=>{
+    request(app.use(usuarios))
+    .get("/obtenerMiUsuario")
+    .send({"correo":"holaDD"})
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
   })  
 });
