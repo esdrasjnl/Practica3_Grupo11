@@ -111,5 +111,31 @@ describe("Express usuarios", async () => {
           done();
         }
       })
-    })
+    });
+    it("TestLoinClaveVacio request /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"yova22@gmail.com","clave":""})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      })
+    });
+    it("TestLoginCamposVacios request  /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"","clave":""})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
 });
