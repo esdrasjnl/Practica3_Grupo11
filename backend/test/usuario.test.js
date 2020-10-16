@@ -28,7 +28,20 @@ describe("Express usuarios", async () => {
           }
          });
     });
-
+    it("TestTipoDato POST request /agregar", (done) => {
+        request(app.use(usuarios))
+          .post("/agregar")
+          .send({"user_name": "us","correo": "us1@gmail.com","clave":"123","nombre": "usuario1","apellido":"users","cui":"hola","edad":"23","ref_id_tipo":"1"})
+          .expect(200)
+           .end( (err,res)=>{
+           console.log(res.body);
+            if (err) {
+              done(err);
+            }else{
+              done();
+            }
+           });
+      });
     it("TestNotFound Post request /agregar",(done)=>{
       request(app.use(usuarios))
       .post("/add")
