@@ -36,4 +36,11 @@ export class LoginComponent implements OnInit {
     return false;
   }
 
+  loguear()
+  {
+    return this.error
+  }
+
+
+
 }

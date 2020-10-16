@@ -73,4 +73,11 @@ describe('LoginComponent', () => {
 
   });
 
+  describe('TDD PARA VERIFICAR QUE EL METODO DE LOGUEAR FUNCIONA', () => {
+    it('Comprobacion que el metodo de login funcione', function () {
+      expect(component.loguear()).toBeFalsy();
+    });
+
+  });
+
 });
