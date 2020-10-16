@@ -82,4 +82,22 @@ describe("Express usuarios", async () => {
             }
         })
     });
+/**
+ * ***********************************************************************************************
+ *            GETUSUARIO----obtenerMiUsuario
+ * ************************************************************************************************
+ */
+  it("TestObtenerMisuario request GET /obtenerMiusuario",(done)=>{
+    request(app.use(usuarios))
+    .get("/obtenerMiUsuario")
+    .send({"correo":"yova22@gmail.com"})
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    })
+  })  
 });
