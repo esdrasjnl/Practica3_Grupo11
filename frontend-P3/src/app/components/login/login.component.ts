@@ -25,4 +25,15 @@ export class LoginComponent implements OnInit {
   email:string="";
   clave:string="";
 
+  correoCorrecto(correo: string)
+  {
+    const exp = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+
+    if(exp.test(correo))
+    {
+      return true;
+    }
+    return false;
+  }
+
 }

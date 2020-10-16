@@ -53,4 +53,24 @@ describe('LoginComponent', () => {
     });
 
   });
+
+  describe('TDD PARA VERIFICAR CORREO CORRECTO EN LOGIN', () => {
+    it('Comprobacion de correo correcto Login', function () {
+      expect(component.correoCorrecto('eje_mplo@gmail.com')).toBeTruthy();
+    });
+
+    it('Comprobacion de correo incorrecto Login', function () {
+      expect(component.correoCorrecto('ejemplogmail.com')).toBeFalsy();
+    });
+
+    it('Comprobacion de correo incorrecto Login', function () {
+      expect(component.correoCorrecto('ejemplo@gmailcom')).toBeFalsy();
+    });
+
+    it('Comprobacion de correo incorrecto Login', function () {
+      expect(component.correoCorrecto('')).toBeFalsy();
+    });
+
+  });
+
 });
