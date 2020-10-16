@@ -8,8 +8,8 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
         return res.json({ 'Msg': 'Faltan Datos' });
         //console.log(req.body.carnet);
     } else {
-        if (Number.isInteger(req.body.cui) || Number.isInteger(req.body.edad)) {
-            const validacion = `select count(*) as retorno from usuario where correo = '${req.body.correo}' and user_name = '${req.body.user_name}' and cui = ${req.body.cui}`;
+       // if (Number.isInteger(req.body.cui) || Number.isInteger(req.body.edad)) {
+            const validacion = `select count(*) as retorno from usuario where correo = '${req.body.correo}' or user_name = '${req.body.user_name}' or cui = ${req.body.cui}`;
             //var existeDato = 0;
             mysqldb.connection.query(validacion, function (err, results) {
                 if (err) {
@@ -39,9 +39,9 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
                     res.json({ 'estado': 'Datos Repetidos' });
                 }
             });
-        } else {
-            res.json('Revise los tipos de datos ingresados'); 
-        }
+       // } else {
+        //    res.json('Revise los tipos de datos ingresados'); 
+       // }
     }
 
 }
