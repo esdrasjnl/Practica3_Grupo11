@@ -99,4 +99,17 @@ describe("Express usuarios", async () => {
         }
       })
     });
+    it("TestLoginDataNull request /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"","clave":"123"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      })
+    })
 });
