@@ -14,7 +14,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
 
 describe("Express usuarios", async () => {
-    it("TEstgetUser POST request /agregar", (done) => {
+    it("TestpostUser POST request /agregar", (done) => {
       request(app.use(usuarios))
         .post("/agregar")
         .send({"user_name": "us","correo": "us1@gmail.com","clave":"123","nombre": "usuario1","apellido":"users","cui":"7868776","edad":"23","ref_id_tipo":"1"})
@@ -28,6 +28,20 @@ describe("Express usuarios", async () => {
           }
          });
     });
+
+    it("TestNotFound Post request /agregar",(done)=>{
+      request(app.use(usuarios))
+      .post("/add")
+      .send({"user_name": "us","correo": "us1@gmail.com","clave":"123","nombre": "usuario1","apellido":"users","cui":"7868776","edad":"23","ref_id_tipo":"1"})
+      .expect(404)
+      .end((err,res)=>{
+          if(err){
+              done(err);
+          }else{
+              done();
+          }
+      })
+  });
     it("TestNotFound Post request /agregar",(done)=>{
         request(app.use(usuarios))
         .post("/add")
