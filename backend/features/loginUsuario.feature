@@ -1,6 +1,6 @@
  
 Feature: Login_Usuario
-  Se utilizo para verificar que el Login sea exitoso..
+  Se utilizo para verificar que el Login sea exitoso...
 
 Scenario: El invitado provee sus credenciales
     Given El invitado esta registrado en la base de datos de usuarios
