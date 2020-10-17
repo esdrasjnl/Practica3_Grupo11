@@ -77,4 +77,87 @@ describe('CompraComponent', () => {
     });
 
   });
+
+  describe('MOCKS', () => {
+    it('MOCKS DE TARJETAS A CARGAR VERIFICA QUE EL ESTADO SEA ACTIVO', function () {
+      const res =
+        [
+          {
+            id: "4",
+            nombre: "Amazon",
+            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+            chargeRate: 0.5,
+            active: true,
+            disponibilidad: [
+              2,
+              4
+            ]
+          }
+        ]
+
+        var s = new CompraComponent(component.service, component.router);
+        spyOn(s,'verificaEstado').and.callThrough();
+        var result = s.verificaEstado(res);
+        expect(result).toEqual(res);
+    });
+
+    it('MOCKS DE TARJETAS A CARGAR VERIFICA QUE EL ESTADO SEA ACTIVO PERO LA TARJETA ENTRANTE ES FALSA', function () {
+      const res =
+        [
+          {
+            id: "4",
+            nombre: "Amazon",
+            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+            chargeRate: 0.5,
+            active: false,
+            disponibilidad: [
+              2,
+              4
+            ]
+          }
+        ]
+
+        var s = new CompraComponent(component.service, component.router);
+        spyOn(s,'verificaEstado').and.callThrough();
+        var result = s.verificaEstado(res);
+        expect(result).not.toEqual(res);
+    });
+
+    it('MOCKS DE TARJETAS A CARGAR VERIFICA QUE EL TAMAÑO DEL VECTOR SEA CORRECTO', function () {
+      const res =
+        [
+          {
+            id: "4",
+            nombre: "Amazon",
+            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+            chargeRate: 0.5,
+            active: true,
+            disponibilidad: [
+              2,
+              4
+            ]
+          },
+          {
+            id: "4",
+            nombre: "Amazon",
+            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+            chargeRate: 0.5,
+            active: false,
+            disponibilidad: [
+              2,
+              4
+            ]
+          }
+        ]
+
+        var s = new CompraComponent(component.service, component.router);
+        spyOn(s,'verificaEstado').and.callThrough();
+        var result = s.verificaEstado(res);
+        expect(result.length).not.toEqual(res.length);
+    });
+
+
+
+  });
+
 });
