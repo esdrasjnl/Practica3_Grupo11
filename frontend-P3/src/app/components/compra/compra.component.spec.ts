@@ -14,9 +14,9 @@ describe('CompraComponent', () => {
       imports: [
         HttpClientTestingModule, RouterTestingModule.withRoutes([]),
         ReactiveFormsModule, FormsModule],
-      declarations: [ CompraComponent ]
+      declarations: [CompraComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,6 +32,43 @@ describe('CompraComponent', () => {
   describe('TDD PARA CARGA DE GIFTCARDS', () => {
     it('GIFTCARDS CARGADAS EXITOSAMENTE', function () {
       expect(component.error).toBeFalsy();
+
+    });
+
+  });
+
+  describe('TDD VERIFICANDO VALORES', () => {
+    it('CAMPO ACTIVE SOLO HACEPTA TRUE O FALSE', function () {
+      const res =
+      {
+        "id": "4",
+        "nombre": "Amazon",
+        "imagen": "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+        "chargeRate": 0.5,
+        "active": false,
+        "disponibilidad": [
+          2,
+          4
+        ]
+      }
+      expect(component.verificaEstado(res)).toBeFalsy();
+
+    });
+
+    it('CAMPO ACTIVE SOLO HACEPTA TRUE O FALSE', function () {
+      const res =
+      {
+        "id": "4",
+        "nombre": "Amazon",
+        "imagen": "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+        "chargeRate": 0.5,
+        "active": 'ejemplo',
+        "disponibilidad": [
+          2,
+          4
+        ]
+      }
+      expect(component.verificaEstado(res)).toBeTruthy();
 
     });
 
