@@ -15,7 +15,7 @@ describe('DatosUsuarioComponent', () => {
       imports: [
         HttpClientTestingModule, RouterTestingModule.withRoutes([]),
         ReactiveFormsModule, FormsModule],
-      declarations: [ DatosUsuarioComponent ]
+      declarations: [DatosUsuarioComponent ]
     })
     .compileComponents();
   }));
@@ -143,6 +143,24 @@ describe('DatosUsuarioComponent', () => {
 
     it(' EDAD incorrecto', function () {
       expect(component.edadCorrecto('nu')).toBeFalsy();
+    });
+
+  });
+
+
+  describe('MOCKS PARA VERIFICAR CUI', () => {
+    it('VERIFICA CUI CORRECTO', function () {
+      var s = new DatosUsuarioComponent(component.service, component.router);
+      spyOn(s, 'dpiCorrecto').and.callThrough();
+      var result = component.dpiCorrecto('1234567891012');
+      expect(result).toBeTruthy();
+    });
+
+    it('VERIFICA CUI CORRECTO', function () {
+      var s = new DatosUsuarioComponent(component.service, component.router);
+      spyOn(s, 'dpiCorrecto').and.callThrough();
+      var result = component.dpiCorrecto('12345678910');
+      expect(result).toBeFalsy();
     });
 
   });
