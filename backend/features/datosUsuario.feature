@@ -1,5 +1,5 @@
 Feature: Datos_Usuario
-  Se utilizo para verificar el usuario registre sus datossss
+  Se utilizo para verificar el usuario registre sus datosssss
 
 Scenario: El usuario previamente registrado solocita los datos 
     Given El usuario esta en la base de datos
