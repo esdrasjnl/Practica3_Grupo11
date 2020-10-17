@@ -7,6 +7,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
 
 
 
@@ -14,7 +15,8 @@ import { HomeComponent } from './components/home/home.component';
   declarations: [
     AppComponent,
     RegistroComponent,
-    HomeComponent
+    HomeComponent,
+    DatosUsuarioComponent
   ],
   imports: [
     BrowserModule,
