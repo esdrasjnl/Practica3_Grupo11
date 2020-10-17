@@ -103,4 +103,20 @@ describe('LoginComponent', () => {
 
   });
 
+  describe('MOCKS PARA CORREO CORRECTO', () => {
+    it('Mock para comprobar correo que sea correcto', function () {
+      var s = new LoginComponent(component.service, component.router);
+      spyOn(s, 'correoCorrecto').and.callThrough();
+      var result = component.correoCorrecto('ejemplo@gmail.com');
+      expect(result).toBeTruthy();
+    });
+
+    it('Mock para comprobar correo que sea incorrecto', function () {
+      var s = new LoginComponent(component.service, component.router);
+      spyOn(s, 'correoCorrecto').and.callThrough();
+      var result = component.correoCorrecto('ejemplo*@gmail.com');
+      expect(result).toBeFalsy();
+    });
+  });
+
 });
