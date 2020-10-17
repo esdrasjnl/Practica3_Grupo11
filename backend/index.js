@@ -4,6 +4,7 @@ var http = require('http');
 var app = express();
 var cors=require('cors');
 var mysqldb =require('./database');
+var cors = require('cors');
 const PORT = process.env.PORT || 4000;
 
 app.use(bodyparser.json());
