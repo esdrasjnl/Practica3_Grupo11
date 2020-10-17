@@ -37,9 +37,6 @@ describe('DatosUsuarioComponent', () => {
         correo: ''
       };
 
-      var s = new DatosUsuarioComponent(component.service, component.router);
-      
-      component.verperfil;
       expect(component.error).toBeFalsy;
       expect(component.usuario).toEqual(usuario);
 
@@ -71,14 +68,7 @@ describe('DatosUsuarioComponent', () => {
 
   });
 
-  describe('TDD PARA METODO VERPERFIL', () => {
 
-    it('Comprobacion de metodo verperfil no se envia ningun dato', function () {
-      expect(component.verperfil()).toBeFalsy();
-    });
-
-
-  });
 
   describe('TDD PARA METODO LLENAR CAMPOS', () => {
 
@@ -159,7 +149,7 @@ describe('DatosUsuarioComponent', () => {
     it('VERIFICA CUI CORRECTO', function () {
       var s = new DatosUsuarioComponent(component.service, component.router);
       spyOn(s, 'dpiCorrecto').and.callThrough();
-      var result = component.dpiCorrecto('12345678910');
+      var result = component.dpiCorrecto('123456789101');
       expect(result).toBeFalsy();
     });
 

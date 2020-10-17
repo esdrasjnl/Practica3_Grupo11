@@ -15,7 +15,7 @@ const routes: Routes = [
     component: RegistroComponent
   }, 
   {
-    path: 'datos_usuario',
+    path: 'perfil',
     component: DatosUsuarioComponent
   }
   

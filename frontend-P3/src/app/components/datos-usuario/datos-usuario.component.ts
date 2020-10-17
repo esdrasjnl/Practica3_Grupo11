@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistroService } from "../../services/registro.service";
+import {RegistroService } from "../../services/registro.service";
 
 import { Router } from '@angular/router';
 @Component({
@@ -13,6 +13,7 @@ export class DatosUsuarioComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.llenarCampos();
   }
 
   
@@ -39,6 +40,7 @@ export class DatosUsuarioComponent implements OnInit {
     edad: '',
     ref_id_tipo: 1
   };
+
 
   usuario = {
     correo: ''
@@ -104,12 +106,16 @@ ApellidosCorrecto(apellidos: string)
     return false;
   }
 
+
   llenarCampos()
   {
-
-  }
-
-  verperfil(){
+    this.username = localStorage.getItem('username');
+    this.nombre = localStorage.getItem('nombre');
+    this.apellidos = localStorage.getItem('apellidos');
+    this.cui = localStorage.getItem('cui');
+    this.clave = localStorage.getItem('clave');
+    this.edad = localStorage.getItem('edad');
+    this.correo = localStorage.getItem('correo');
 
   }
 }
