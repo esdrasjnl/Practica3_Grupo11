@@ -19,28 +19,26 @@ export class CompraComponent implements OnInit {
     this.obtenerTarjetas();
   }
 
-  verificaEstado(res: any)
-  {
-    if(res.active != true && res.active != false)
-    {
-      return true;
+  verificaEstado(res: any) {
+    console.log(res);
+    let j = 0;
+    for (let i = 0; i < res.length; i++) {
+      if (res[i].active == true) {
+        this.cards[j] = res[i];
+        j++;
+      }
+
     }
-    return false;
+    return this.cards;
   }
+
 
   obtenerTarjetas() {
     this.service.getTarjetas()
 
       .subscribe(
         res => {
-          let j = 0;
-          for (let i = 0; i < res.length; i++) {
-            if (res[i].active == true) {
-              this.cards[j] = res[i];
-              j++;
-            }
-
-          }
+          this.verificaEstado(res);
           this.error = false
         },
         err => this.error = true

@@ -38,37 +38,41 @@ describe('CompraComponent', () => {
   });
 
   describe('TDD VERIFICANDO VALORES', () => {
-    it('CAMPO ACTIVE SOLO HACEPTA TRUE O FALSE', function () {
+    it('No se guardara la tarjeta', function () {
       const res =
-      {
-        "id": "4",
-        "nombre": "Amazon",
-        "imagen": "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
-        "chargeRate": 0.5,
-        "active": false,
-        "disponibilidad": [
-          2,
-          4
+        [
+          {
+            id: "4",
+            nombre: "Amazon",
+            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+            chargeRate: 0.5,
+            active: false,
+            disponibilidad: [
+              2,
+              4
+            ]
+          }
         ]
-      }
-      expect(component.verificaEstado(res)).toBeFalsy();
+      expect(component.verificaEstado(res)).not.toEqual(res);
 
     });
 
-    it('CAMPO ACTIVE SOLO HACEPTA TRUE O FALSE', function () {
+    it('Se guardara la tarjeta por que si esta activa', function () {
       const res =
-      {
-        "id": "4",
-        "nombre": "Amazon",
-        "imagen": "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
-        "chargeRate": 0.5,
-        "active": 'ejemplo',
-        "disponibilidad": [
-          2,
-          4
+        [
+          {
+            id: "4",
+            nombre: "Amazon",
+            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+            chargeRate: 0.5,
+            active: true,
+            disponibilidad: [
+              2,
+              4
+            ]
+          }
         ]
-      }
-      expect(component.verificaEstado(res)).toBeTruthy();
+      expect(component.verificaEstado(res)).toEqual(res);
 
     });
 
