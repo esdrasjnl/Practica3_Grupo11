@@ -82,6 +82,7 @@ describe("Express usuarios", async () => {
             }
         })
     });
+<<<<<<< HEAD
 /**
  * ***********************************************************************************************
  *            GETUSUARIO----obtenerMiUsuario
@@ -126,4 +127,62 @@ describe("Express usuarios", async () => {
       }
     });
   })  
+=======
+    /**
+     * ******************************************************************************************************
+     */
+    //===============================================Pruebas unitarias para login================================
+    it("TestLoginPost request /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"yova22@gmail.com","clave":"123"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      })
+    });
+    it("TestLoginDataNull request /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"","clave":"123"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      })
+    });
+    it("TestLoinClaveVacio request /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"yova22@gmail.com","clave":""})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      })
+    });
+    it("TestLoginCamposVacios request  /login",(done)=>{
+      request(app.use(usuarios))
+      .post("/login")
+      .send({"email":"","clave":""})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
+>>>>>>> login
 });

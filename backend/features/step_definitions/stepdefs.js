@@ -27,6 +27,7 @@ Then('El usuario obtiene el mensaje {string}', function(retornoEsperado) {
     assert.equal(this.estadoActualRegistro, retornoEsperado);
 });
 
+<<<<<<< HEAD
 //------------------------- Para la verificacion de datos de usuario -------------------------
 function verificacionDatos(retornoverfdatos) {
     if (retornoverfdatos === 1) {
@@ -49,4 +50,30 @@ When('Accede al endpoint que provee sus datos', function() {
 Then('El usuario obtiene sus datos {string}', function(retornoEsperado) {
     // Write code here that turns the phrase above into concrete actions
     assert.equal(this.estadoVerfDatos, retornoEsperado);
+=======
+//------------------------- Para el Login de usuario -------------------------
+function loginExitoso(retorno) {
+    if (retorno === "Login Correcto") {
+        return "Login";
+    } else {
+        return "Error de Login";
+    }
+}
+
+Given('El invitado esta registrado en la base de datos de usuarios', function() {
+    // Write code here that turns the phrase above into concrete actions
+    //return 'pending';
+    this.retorno = "Login Correcto"
+});
+
+When('Hace clic en el boton Login', function() {
+    // Write code here that turns the phrase above into concrete actions
+    //return 'pending';
+    this.estadoActualLogin = loginExitoso(this.retorno);
+});
+
+Then('El usuario accede a GiftHub {string}', function(retornoEsperado) {
+    // Write code here that turns the phrase above into concrete actions
+    assert.equal(this.estadoActualLogin, retornoEsperado);
+>>>>>>> login
 });

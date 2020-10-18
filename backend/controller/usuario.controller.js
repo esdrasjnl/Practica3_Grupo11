@@ -42,6 +42,7 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
     }
 }
 
+<<<<<<< HEAD
 usuarioCtrl.getUsuario = async function (req, res, next) {
     const { correo } = req.body;
     let parametrosValidos = !correo;
@@ -74,4 +75,42 @@ usuarioCtrl.getUsuario = async function (req, res, next) {
 // });
 
 
+=======
+usuarioCtrl.loginUsuario = async function (req, res, next) {
+    const { user_name, email, clave } = req.body;
+    let parametrosValidos = !user_name && !clave || !email && !clave;
+    if (!parametrosValidos) {
+        const sql = `select * from usuario where user_name = '${user_name}' and clave = '${clave}' or correo = '${email}' and clave = '${clave}'`;
+        mysqldb.connection.query(sql, (error, result) => {
+            try {
+                if (user_name == "" || clave == "" || email == "") {
+                    res.send('No hay resultados');
+                } else {
+                    if (error) throw error;
+                    if (result.length > 0) {
+                        res.json(result);
+                        /*
+                        res.status(201).json({
+                            msg: "true",
+                        });
+                        */
+                    } else {
+                        res.send('No hay resultados');
+                        /*
+                        res.status(201).json({
+                            msg: "false"
+                        });
+                        */
+                    }
+                }
+            } catch (error) {
+                res.send('Error');
+            }
+        });
+    } else {
+        return res.json({ 'Msg': 'Datos insuficientes para el login' });   
+    }
+}
+
+>>>>>>> login
 module.exports = usuarioCtrl;
