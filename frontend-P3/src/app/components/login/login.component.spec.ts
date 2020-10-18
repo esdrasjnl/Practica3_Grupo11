@@ -96,12 +96,6 @@ describe('LoginComponent', () => {
 
   });
 
-  describe('TDD PARA VERIFICAR QUE EL METODO DE LOGUEAR FUNCIONA', () => {
-    it('Comprobacion que el metodo de login funcione', function () {
-      expect(component.loguear()).toBeFalsy();
-    });
-
-  });
 
   describe('MOCKS PARA CORREO CORRECTO', () => {
     it('Mock para comprobar correo que sea correcto', function () {
