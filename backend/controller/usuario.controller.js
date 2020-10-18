@@ -42,4 +42,36 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
     }
 }
 
+usuarioCtrl.getUsuario = async function (req, res, next) {
+    const { correo } = req.body;
+    let parametrosValidos = !correo;
+    if (!parametrosValidos) {
+        const sql = `select * from usuario where correo = '${correo}'`;
+    mysqldb.connection.query(sql, (error, result) => {
+        if (error) throw error;
+        if (result.length > 0) {
+            res.json(result);
+        } else {
+            res.send('No hay resultados');
+        }
+    });
+    } else {
+        res.json({'Msg':'Debe de ingresar un correo'});
+    }
+}
+
+// router.get('/obtener/:id', (req, res) => {
+//     const { id } = req.params;
+//     const sql = `select * from usuario where idusuariocle = ${id}`;
+//     connection.query(sql, (error, result) => {
+//         if(error) throw error;
+//         if(result.length > 0){
+//             res.json(result);
+//         } else {
+//             res.send('No hay resultados');
+//         }
+//     });
+// });
+
+
 module.exports = usuarioCtrl;
