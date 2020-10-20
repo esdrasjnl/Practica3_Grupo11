@@ -52,7 +52,7 @@ Then('El usuario obtiene sus datos {string}', function(retornoEsperado) {
     assert.equal(this.estadoVerfDatos, retornoEsperado);
 });
 
-//------------------------- Para el Login de usuario -------------------------
+//------------------------- Para el Login de usuario ---------------------------
 function loginExitoso(retorno) {
     if (retorno === "Login Correcto") {
         return "Login";
