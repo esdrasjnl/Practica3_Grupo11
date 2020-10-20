@@ -28,7 +28,7 @@ Then('El usuario obtiene el mensaje {string}', function(retornoEsperado) {
 });
 
 
-//------------------------- Para la verificacion de datos de usuario -------------------------
+//------------------------- Para la verificacion de datos de usuario --------------------------
 function verificacionDatos(retornoverfdatos) {
     if (retornoverfdatos === 1) {
         return "Los datos de usuario coinciden";
