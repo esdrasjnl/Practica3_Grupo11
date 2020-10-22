@@ -14,17 +14,38 @@ export class CompraComponent implements OnInit {
 
   cards: any = [];
   error = false;
+  precio: any = [];
 
   ngOnInit() {
-    this.obtenerTarjetas();
+    this.obtenerPrecio();
   }
 
   verificaEstado(res: any) {
-    console.log(res);
     let j = 0;
     for (let i = 0; i < res.length; i++) {
       if (res[i].active == true) {
-        this.cards[j] = res[i];
+        const tarjeta =
+        {
+          id: res[i].id,
+          name: res[i].name,
+          image: res[i].image,
+          chargeRate: res[i].chargeRate,
+          active: res[i].active,
+          availability:'',
+        }
+        console.log(res[0].availability[0]);
+        for (let a = 0; a < res[i].availability.length; a++) {
+          for (let p = 0; p < this.precio.length; p++) {
+            if(res[i].availability[a] == this.precio[p].id)
+            {
+              res[i].availability[a] = this.precio[p].total;
+            }
+          }
+        }
+
+        tarjeta.availability = res[i].availability;
+        this.cards[j] = tarjeta;
+        console.log(this.cards);
         j++;
       }
 
@@ -42,9 +63,17 @@ export class CompraComponent implements OnInit {
           this.error = false
         },
         err => this.error = true
-
       )
-
   }
 
+  obtenerPrecio() {
+    this.service.getPrecio()
+      .subscribe(
+        res => {
+          this.precio = res;
+          this.obtenerTarjetas();
+        },
+        err => console.log(err)
+      )
+  }
 }

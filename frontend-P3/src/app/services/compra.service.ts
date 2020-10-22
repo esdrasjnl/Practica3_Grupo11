@@ -15,4 +15,9 @@ export class CompraService {
     {
       return this.http.get<any>(`${this.api}/Card`);
     }
+
+    getPrecio()
+    {
+      return this.http.get<any>(`${this.api}/Value`);
+    }
 }
