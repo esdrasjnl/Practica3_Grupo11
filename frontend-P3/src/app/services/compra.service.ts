@@ -20,4 +20,8 @@ export class CompraService {
     {
       return this.http.get<any>(`${this.api}/Value`);
     }
+    setdatos(user:any) {
+    let user_string = JSON.stringify(user);
+      localStorage.setItem('Compras', user_string);
+    } 
 }

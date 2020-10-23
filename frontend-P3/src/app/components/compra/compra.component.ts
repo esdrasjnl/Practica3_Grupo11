@@ -16,6 +16,7 @@ export class CompraComponent implements OnInit {
   error = false;
   precio: any = [];
 
+  compras: any = [];
   ngOnInit() {
     this.obtenerPrecio();
   }
@@ -76,11 +77,12 @@ export class CompraComponent implements OnInit {
         err => console.log(err)
       )
   }
-
-  enviardatos(nombre:any,precio:any){
-console.log(nombre);
-console.log(precio);
-this.router.navigate(['/carrito', precio, nombre]); 
-
+ p:any=[];
+  enviardatos(nombre,precio){
+this.p.push({precio:precio,name: nombre});
+this.service.setdatos(this.p);
+  }
+  comprar(){
+    this.router.navigate(['carrito']); 
   }
 }

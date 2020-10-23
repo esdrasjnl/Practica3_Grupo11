@@ -34,7 +34,7 @@
     </tr>
 </table>
 
-<div class="row">
+<div class="row" >
     <div *ngFor="let card of cards" class="col-3">
         <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
             <div class="card-header text-warning">
@@ -52,4 +52,9 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <button type="button" id="comprar" (click)="comprar()" class="btn btn-info ">Agregar a carrito</button>
+    </div>
+
 </div>
