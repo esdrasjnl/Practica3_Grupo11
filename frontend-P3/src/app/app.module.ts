@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { CompraComponent } from './components/compra/compra.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 
 
@@ -16,7 +17,8 @@ import { CompraComponent } from './components/compra/compra.component';
     AppComponent,
     RegistroComponent,
     HomeComponent,
-    CompraComponent
+    CompraComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

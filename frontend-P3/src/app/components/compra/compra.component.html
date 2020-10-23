@@ -46,7 +46,7 @@
             <div class="row">
                 <div *ngFor="let ava of card.availability" class="abs-center">
                     <div>
-                        <button type="button" class="btn btn-info">${{ava}}</button>
+                        <button type="button" id="Registro" (click)="enviardatos(card.name,ava)" class="btn btn-info ">${{ava}}</button>
                     </div>
                 </div>
             </div>

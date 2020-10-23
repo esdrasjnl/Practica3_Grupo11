@@ -76,4 +76,11 @@ export class CompraComponent implements OnInit {
         err => console.log(err)
       )
   }
+
+  enviardatos(nombre:any,precio:any){
+console.log(nombre);
+console.log(precio);
+this.router.navigate(['/carrito', precio, nombre]); 
+
+  }
 }
