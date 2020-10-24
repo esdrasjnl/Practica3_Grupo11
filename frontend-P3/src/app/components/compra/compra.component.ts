@@ -16,6 +16,7 @@ export class CompraComponent implements OnInit {
   error = false;
   precio: any = [];
 
+
   compras: any = [];
   ngOnInit() {
     this.obtenerPrecio();
@@ -32,13 +33,11 @@ export class CompraComponent implements OnInit {
           image: res[i].image,
           chargeRate: res[i].chargeRate,
           active: res[i].active,
-          availability:'',
+          availability: '',
         }
-        console.log(res[0].availability[0]);
         for (let a = 0; a < res[i].availability.length; a++) {
           for (let p = 0; p < this.precio.length; p++) {
-            if(res[i].availability[a] == this.precio[p].id)
-            {
+            if (res[i].availability[a] == this.precio[p].id) {
               res[i].availability[a] = this.precio[p].total;
             }
           }
@@ -46,7 +45,6 @@ export class CompraComponent implements OnInit {
 
         tarjeta.availability = res[i].availability;
         this.cards[j] = tarjeta;
-        console.log(this.cards);
         j++;
       }
 
@@ -77,12 +75,30 @@ export class CompraComponent implements OnInit {
         err => console.log(err)
       )
   }
- p:any=[];
-  enviardatos(nombre,precio){
-this.p.push({precio:precio,name: nombre});
-this.service.setdatos(this.p);
+
+  p: any = [];
+  total = 0;
+  enviardatos(nombre, imagen, recargo, precio) {
+    var bandera = 1;
+    this.total = this.total + Number(precio);
+
+    for (let i = 0; i < this.p.length; i++) {
+      if (this.p[i].name == nombre && this.p[i].precio == precio) {
+        console.log("entro");
+        this.p[i].repite += 1;
+        this.service.setdatos(this.p);
+        bandera = 2;
+        break;
+      }
+    }
+    if(bandera == 1)
+    {
+      this.p.push({ precio: precio, name: nombre, image: imagen, chargeRate: recargo, repite: 1 });
+      this.service.setdatos(this.p);
+    }
+
   }
-  comprar(){
-    this.router.navigate(['carrito']); 
+  comprar() {
+    this.router.navigate(['carrito']);
   }
 }
