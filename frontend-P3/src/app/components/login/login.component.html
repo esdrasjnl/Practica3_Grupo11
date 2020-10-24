@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login">Inicio de sesion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="registro">Registro</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+        </form>
+    </div>
+</nav>
+
+
+<table style="margin: 0 auto;">
+    <tr>
+        <td>
+        </td>
+        <td>
+            <div class="form-group">
+                <p class="text-warning"></p>
+                <h4 class="p-3 mb-2 bg-warning text-dark">LOGIN</h4>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo Electronico</label>
+                    <input name="cajac" id="cajac" [(ngModel)]="email" type="usuario" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input name="cajap" id="cajap" [(ngModel)]="clave" type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Recordar Contraseña</label>
+                </div>
+                <button type="submit" class="btn btn-primary" id="Ingresar" (click)="verificacion()">Ingresar</button>
+            </form>
+        </td>
+    </tr>
+</table>
