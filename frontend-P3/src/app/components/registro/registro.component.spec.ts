@@ -32,7 +32,7 @@ describe('RegistroComponent', () => {
   describe('Prueba Registro', () => {
     it('Realizar prueba', function () {
       const datos = {
-        username: '',
+        user_name: '',
         correo: '',
         clave: '',
         nombre: '',
