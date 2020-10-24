@@ -20,7 +20,8 @@ CREATE TABLE usuario(
 );
 
 CREATE TABLE tarjeta_credito(
-	num_tarjeta			INTEGER PRIMARY KEY,
+	id_tarjeta			INTEGER PRIMARY KEY,
+	num_tarjeta			VARCHAR(16) NOT NULL,
     nombre				VARCHAR(50) NOT NULL,
     fecha				VARCHAR(10) NOT NULL,
     codigo				INTEGER NOT NULL,

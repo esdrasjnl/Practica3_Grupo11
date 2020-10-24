@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import { RegistroComponent } from './components/registro/registro.component';
-<<<<<<< HEAD
+
 import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
 
-=======
+
 import { LoginComponent } from './components/login/login.component';
 import {PrincipalComponent} from './components/principal/principal.component'
->>>>>>> login
+
 
 const routes: Routes = [
   {

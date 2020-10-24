@@ -7,12 +7,12 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
-<<<<<<< HEAD
+
 import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
-=======
+
 import { LoginComponent } from './components/login/login.component';
 import { PrincipalComponent } from './components/principal/principal.component';
->>>>>>> login
+
 
 
 
@@ -21,12 +21,12 @@ import { PrincipalComponent } from './components/principal/principal.component';
     AppComponent,
     RegistroComponent,
     HomeComponent,
-<<<<<<< HEAD
-    DatosUsuarioComponent
-=======
+
+    DatosUsuarioComponent,
+
     LoginComponent,
-    PrincipalComponent
->>>>>>> login
+    PrincipalComponent,
+ 
   ],
   imports: [
     BrowserModule,

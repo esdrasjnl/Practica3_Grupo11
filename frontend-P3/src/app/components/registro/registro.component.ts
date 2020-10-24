@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
   }
 
   datos = {
-    username: '',
+    user_name: '',
     correo: '',
     clave: '',
     nombre: '',
@@ -73,7 +73,7 @@ export class RegistroComponent implements OnInit {
 
   registrar() {
 
-    this.datos.username = this.username;
+    this.datos.user_name = this.username;
     this.datos.nombre = this.nombre;
     this.datos.apellido = this.apellidos;
     this.datos.cui = this.cui;
@@ -88,7 +88,8 @@ export class RegistroComponent implements OnInit {
     this.service.postRegistro(this.datos)
       .subscribe(
         res => {
-          if (res!== "") {
+          console.log(res);
+          if (res.Msg != "Faltan Datos") {
             alert("USUARIO REGISTRADO EXITOSAMENTE!");
           }
           else {
@@ -97,7 +98,7 @@ export class RegistroComponent implements OnInit {
           }
           this.limpiar();
         },
-        err => this.error = true
+        err => console.log(err)
       )
   }
 

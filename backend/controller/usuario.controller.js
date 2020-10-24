@@ -42,7 +42,7 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
     }
 }
 
-<<<<<<< HEAD
+
 usuarioCtrl.getUsuario = async function (req, res, next) {
     const { correo } = req.body;
     let parametrosValidos = !correo;
@@ -75,7 +75,7 @@ usuarioCtrl.getUsuario = async function (req, res, next) {
 // });
 
 
-=======
+
 usuarioCtrl.loginUsuario = async function (req, res, next) {
     const { user_name, email, clave } = req.body;
     let parametrosValidos = !user_name && !clave || !email && !clave;
@@ -112,5 +112,4 @@ usuarioCtrl.loginUsuario = async function (req, res, next) {
     }
 }
 
->>>>>>> login
 module.exports = usuarioCtrl;
