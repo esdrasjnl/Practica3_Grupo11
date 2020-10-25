@@ -7,6 +7,8 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { CompraComponent } from './components/compra/compra.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
 
@@ -21,12 +23,17 @@ import { PrincipalComponent } from './components/principal/principal.component';
     AppComponent,
     RegistroComponent,
     HomeComponent,
+<<<<<<< HEAD
 
     DatosUsuarioComponent,
 
     LoginComponent,
     PrincipalComponent,
  
+=======
+    CompraComponent,
+    CarritoComponent
+>>>>>>> compra
   ],
   imports: [
     BrowserModule,

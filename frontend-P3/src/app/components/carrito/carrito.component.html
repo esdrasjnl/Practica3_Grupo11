@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="principal">Principal </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="perfil">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="compra">Compra</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="window.location.href='#'">Cerrar
+                Sesión</button>
+        </form>
+    </div>
+</nav>
+
+<table style="margin: 0 auto;">
+    <tr>
+        <td>
+            <div class="form-group">
+                <p class="text-warning"></p>
+                <h4 class="p-3 mb-2 bg-warning text-dark">CARRITO DE COMPRA</h4>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="table-responsive">
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">CANTIDAD</th>
+            <th scope="col"></th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">SUBTOTAL EN $.</th>
+            <th scope="col">RECARGO POR TARJETA COMPRADA</th>
+            <th scope="col">TOTAL EN $.</th>
+            <th scope="col">TOTAL EN Q.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of Datos">
+            <td>{{dato.repite}}</td>
+            <td><img src="{{dato.image}}" width="20" height="40"></td>
+            <td>{{dato.name}}</td>
+            <td>${{dato.precio}}</td>
+            <td>${{dato.precio * dato.repite}}</td>
+            <td>{{dato.chargeRate * 100}}%</td>
+            <td>${{((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite) | number : '1.2' }}</td>
+            <td>Q.{{(((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite))*tasa | number : '1.2'}}</td>
+        </tr>
+        <tr>
+            <td colspan="6">TOTAL A PAGAR</td>
+            <td>${{total | number : '1.2'}}</td>
+            <td>Q.{{total * tasa | number : '1.2'}}</td>
+          </tr>
+    </tbody>
+</table>
+</div>
