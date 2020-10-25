@@ -43,7 +43,8 @@
             <th scope="col"></th>
             <th scope="col">NOMBRE</th>
             <th scope="col">PRECIO</th>
-            <th scope="col">RECARGO</th>
+            <th scope="col">SUBTOTAL EN $.</th>
+            <th scope="col">RECARGO POR TARJETA COMPRADA</th>
             <th scope="col">TOTAL EN $.</th>
             <th scope="col">TOTAL EN Q.</th>
         </tr>
@@ -54,13 +55,14 @@
             <td><img src="{{dato.image}}" width="20" height="40"></td>
             <td>{{dato.name}}</td>
             <td>${{dato.precio}}</td>
-            <td>{{dato.chargeRate}}</td>
             <td>${{dato.precio * dato.repite}}</td>
-            <td>Q.{{(dato.precio * dato.repite)*tasa | number : '1.2'}}</td>
+            <td>{{dato.chargeRate * 100}}%</td>
+            <td>${{((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite) | number : '1.2' }}</td>
+            <td>Q.{{(((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite))*tasa | number : '1.2'}}</td>
         </tr>
         <tr>
-            <td colspan="5">TOTAL A PAGAR</td>
-            <td>${{total}}</td>
+            <td colspan="6">TOTAL A PAGAR</td>
+            <td>${{total | number : '1.2'}}</td>
             <td>Q.{{total * tasa | number : '1.2'}}</td>
           </tr>
     </tbody>

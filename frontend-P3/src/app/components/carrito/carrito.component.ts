@@ -18,6 +18,7 @@ export class CarritoComponent implements OnInit {
    //this.rutaActiva.snapshot.params
     //console.log(this.rutaActiva.snapshot.params.card);
     //console.log(this.rutaActiva.snapshot.params.precio);
+    console.log(this.Datos);
     this.obtenerTasa();
     this.PagoTotal();
   }
@@ -39,7 +40,7 @@ export class CarritoComponent implements OnInit {
   PagoTotal()
   {
     for (let i = 0; i < this.Datos.length; i++) {
-      this.total += this.Datos[i].precio * this.Datos[i].repite
+      this.total += ((this.Datos[i].precio * this.Datos[i].repite) * this.Datos[i].chargeRate) + (this.Datos[i].precio * this.Datos[i].repite);
     }
 
   }

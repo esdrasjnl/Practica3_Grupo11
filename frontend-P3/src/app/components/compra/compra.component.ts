@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompraService } from "../../services/compra.service"
 import { Router } from '@angular/router';
+import { NUMBER_TYPE } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -80,7 +81,7 @@ export class CompraComponent implements OnInit {
   total = 0;
   enviardatos(nombre, imagen, recargo, precio) {
     var bandera = 1;
-    this.total = this.total + Number(precio);
+    this.total = this.total + ((Number(precio) * Number(recargo)) + Number(precio));
 
     for (let i = 0; i < this.p.length; i++) {
       if (this.p[i].name == nombre && this.p[i].precio == precio) {
