@@ -10,6 +10,13 @@ export class PrincipalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.inicio();
+  }
+
+  nombre:string="";
+  inicio()
+  {
+    this.nombre = localStorage.getItem('username');
   }
 
 }

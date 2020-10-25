@@ -85,7 +85,6 @@ export class CompraComponent implements OnInit {
 
     for (let i = 0; i < this.p.length; i++) {
       if (this.p[i].name == nombre && this.p[i].precio == precio) {
-        console.log("entro");
         this.p[i].repite += 1;
         this.service.setdatos(this.p);
         bandera = 2;
