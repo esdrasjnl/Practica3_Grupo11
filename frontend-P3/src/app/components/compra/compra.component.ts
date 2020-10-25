@@ -43,7 +43,6 @@ export class CompraComponent implements OnInit {
             }
           }
         }
-
         tarjeta.availability = res[i].availability;
         this.cards[j] = tarjeta;
         j++;
@@ -59,6 +58,7 @@ export class CompraComponent implements OnInit {
 
       .subscribe(
         res => {
+          console.log(res);
           this.verificaEstado(res);
           this.error = false
         },

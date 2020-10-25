@@ -37,90 +37,45 @@ describe('CompraComponent', () => {
 
   });
 
-  describe('TDD VERIFICANDO VALORES', () => {
-    it('No se guardara la tarjeta', function () {
-      const res =
-        [
-          {
-            id: "4",
-            nombre: "Amazon",
-            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
-            chargeRate: 0.5,
-            active: false,
-            disponibilidad: [
-              2,
-              4
-            ]
-          }
-        ]
-      expect(component.verificaEstado(res)).not.toEqual(res);
-
-    });
-
-    it('Se guardara la tarjeta por que si esta activa', function () {
-      const res =
-        [
-          {
-            id: "4",
-            nombre: "Amazon",
-            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
-            chargeRate: 0.5,
-            active: true,
-            disponibilidad: [
-              2,
-              4
-            ]
-          }
-        ]
-      expect(component.verificaEstado(res)).toEqual(res);
-
-    });
-
-  });
-
   describe('MOCKS', () => {
     it('MOCKS DE TARJETAS A CARGAR VERIFICA QUE EL ESTADO SEA ACTIVO', function () {
       const res =
-        [
-          {
-            id: "4",
-            nombre: "Amazon",
-            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
-            chargeRate: 0.5,
-            active: true,
-            disponibilidad: [
-              2,
-              4
-            ]
-          }
+      {
+        id: "4",
+        nombre: "Amazon",
+        imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+        chargeRate: 0.5,
+        active: true,
+        disponibilidad: [
+          2,
+          4
         ]
+      };
 
-        var s = new CompraComponent(component.service, component.router);
-        spyOn(s,'verificaEstado').and.callThrough();
-        var result = s.verificaEstado(res);
-        expect(result).toEqual(res);
+      var s = new CompraComponent(component.service, component.router);
+      spyOn(s, 'verificaEstado').and.returnValue(true);
+      var result = s.verificaEstado(res);
+      expect(result).toBeTruthy();
     });
 
     it('MOCKS DE TARJETAS A CARGAR VERIFICA QUE EL ESTADO SEA ACTIVO PERO LA TARJETA ENTRANTE ES FALSA', function () {
       const res =
-        [
-          {
-            id: "4",
-            nombre: "Amazon",
-            imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
-            chargeRate: 0.5,
-            active: false,
-            disponibilidad: [
-              2,
-              4
-            ]
-          }
+      {
+        id: "4",
+        nombre: "Amazon",
+        imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+        chargeRate: 0.5,
+        active: false,
+        disponibilidad: [
+          2,
+          4
         ]
+      };
 
-        var s = new CompraComponent(component.service, component.router);
-        spyOn(s,'verificaEstado').and.callThrough();
-        var result = s.verificaEstado(res);
-        expect(result).not.toEqual(res);
+      var s = new CompraComponent(component.service, component.router);
+      spyOn(s, 'verificaEstado').and.returnValue(false);;
+      var result = s.verificaEstado(res);
+      expect(result).toBeFalsy();
     });
 
     it('MOCKS DE TARJETAS A CARGAR VERIFICA QUE EL TAMAÑO DEL VECTOR SEA CORRECTO', function () {
@@ -150,14 +105,20 @@ describe('CompraComponent', () => {
           }
         ]
 
-        var s = new CompraComponent(component.service, component.router);
-        spyOn(s,'verificaEstado').and.callThrough();
-        var result = s.verificaEstado(res);
-        expect(result.length).not.toEqual(res.length);
+      var s = new CompraComponent(component.service, component.router);
+      spyOn(s, 'verificaEstado').and.returnValue({
+        id: "4",
+        nombre: "Amazon",
+        imagen: "https://www.shopmyexchange.com/products/images/xlarge/2008097_0000.jpg",
+        chargeRate: 0.5,
+        active: true,
+        disponibilidad: [
+          2,
+          4
+        ]
+      });
+      var result = s.verificaEstado(res);
+      expect(result.length).not.toEqual(res.length);
     });
-
-
-
   });
-
 });
