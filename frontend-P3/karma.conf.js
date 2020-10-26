@@ -21,7 +21,7 @@ module.exports = function(config) {
             fixWebpackSourcePaths: true
         },
         customLaunchers: {
-            ChromeHeadless: {
+            ChromeHeadless: { //configuracion de chromeheadless
                 base: 'Chrome',
                 flags: [
                     '--headless',
