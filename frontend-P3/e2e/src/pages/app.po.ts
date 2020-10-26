@@ -7,6 +7,14 @@ export class AppPage {
     return browser.get(browser.baseUrl) as Promise<any>;
   }
 
+  navigateToLogin() {
+    return browser.get(browser.baseUrl + 'login') as Promise<any>;
+  }
+
+  navigateToPrincipal() {
+    return browser.get(browser.baseUrl + 'principal') as Promise<any>;
+  }
+
  
 
   //OBTENER TITULOS
