@@ -36,35 +36,87 @@
 </table>
 
 <div class="table-responsive">
-<table class="table table-striped table-dark">
-    <thead>
-        <tr>
-            <th scope="col">CANTIDAD</th>
-            <th scope="col"></th>
-            <th scope="col">NOMBRE</th>
-            <th scope="col">PRECIO</th>
-            <th scope="col">SUBTOTAL EN $.</th>
-            <th scope="col">RECARGO POR TARJETA COMPRADA</th>
-            <th scope="col">TOTAL EN $.</th>
-            <th scope="col">TOTAL EN Q.</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let dato of Datos">
-            <td>{{dato.repite}}</td>
-            <td><img src="{{dato.image}}" width="20" height="40"></td>
-            <td>{{dato.name}}</td>
-            <td>${{dato.precio}}</td>
-            <td>${{dato.precio * dato.repite}}</td>
-            <td>{{dato.chargeRate * 100}}%</td>
-            <td>${{((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite) | number : '1.2' }}</td>
-            <td>Q.{{(((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite))*tasa | number : '1.2'}}</td>
-        </tr>
-        <tr>
-            <td colspan="6">TOTAL A PAGAR</td>
-            <td>${{total | number : '1.2'}}</td>
-            <td>Q.{{total * tasa | number : '1.2'}}</td>
-          </tr>
-    </tbody>
-</table>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">CANTIDAD</th>
+                <th scope="col"></th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">PRECIO</th>
+                <th scope="col">SUBTOTAL EN $.</th>
+                <th scope="col">RECARGO POR TARJETA COMPRADA</th>
+                <th scope="col">TOTAL EN $.</th>
+                <th scope="col">TOTAL EN Q.</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dato of Datos">
+                <td>{{dato.repite}}</td>
+                <td><img src="{{dato.image}}" width="20" height="40"></td>
+                <td>{{dato.name}}</td>
+                <td>${{dato.precio}}</td>
+                <td>${{dato.precio * dato.repite}}</td>
+                <td>{{dato.chargeRate * 100}}%</td>
+                <td>${{((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite) | number : '1.2' }}
+                </td>
+                <td>Q.{{(((dato.precio * dato.repite)*dato.chargeRate) + (dato.precio * dato.repite))*tasa | number : '1.2'}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">TOTAL A PAGAR</td>
+                <td>${{total | number : '1.2'}}</td>
+                <td>Q.{{total * tasa | number : '1.2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="pago">
+    <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+        <table style="margin: 0 auto;">
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <p class="text-warning"></p>
+                        <h4 class="p-3 mb-2 bg-warning text-dark">PAGO DE GIFTCARD</h4>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">NUMERO DE TARJETA DE CREDITO</label>
+                            <input name="cajaT" id="cajaT" [(ngModel)]="tarjeta" type="text" class="form-control"
+                                placeholder="NUMERO DE TARJETA">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">NOMBRE DE PROPIETARIO</label>
+                            <input name="cajaN" id="cajaN" [(ngModel)]="nombre" type="text" class="form-control"
+                                placeholder="NOMBRE PROPIETARIO">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">FECHA EXPIRACION</label>
+                            <input name="cajaF" id="cajaF" [(ngModel)]="fecha" type="text" class="form-control"
+                                placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">CVV</label>
+                            <input name="cajaC" id="cajaC" [(ngModel)]="cvv" type="text" class="form-control"
+                                placeholder="CVV">
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">ELEGIR MONEDA PARA REALIZAR PAGO</label>
+                                <select [ngModel]="selected" class="custom-select" (ngModelChange)="recibirPago($event)">
+                                  <option name="moneda" [ngValue]="pago">${{total | number : '1.2'}}</option>
+                                  <option name="moneda" [ngValue]="pago">Q{{total * tasa | number : '1.2'}}</option>
+                                </select>
+                              </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="Ingresar"
+                            (click)="realizarPago()">REALIZAR PAGO</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
