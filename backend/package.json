@@ -1,27 +1,27 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "NODE_ENV=test nodemon --exec 'mocha --R min'",
-    "test-cuc": "cucumber-js",
-    "dev": "nodemon backend/index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "cucumber": "^7.0.0-rc.0",
-    "express": "^4.17.1",
-    "mocha": "^8.1.3",
-    "mysql": "^2.18.1",
-    "supertest": "^4.0.2"
-  },
-  "devDependencies": {
-    "@cucumber/cucumber": "^7.0.0-rc.0",
-    "nodemon": "^2.0.5"
-  }
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --exit",
+        "test-cuc": "cucumber-js",
+        "dev": "nodemon backend/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "cucumber": "^7.0.0-rc.0",
+        "express": "^4.17.1",
+        "mocha": "^8.1.3",
+        "mysql": "^2.18.1",
+        "supertest": "^4.0.2"
+    },
+    "devDependencies": {
+        "@cucumber/cucumber": "^7.0.0-rc.0",
+        "nodemon": "^2.0.5"
+    }
 }

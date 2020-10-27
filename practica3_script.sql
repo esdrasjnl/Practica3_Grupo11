@@ -40,3 +40,50 @@ CREATE TABLE historial(
     ref_id_usuario		INTEGER NOT NULL,
     CONSTRAINT fk_usuario_historial  FOREIGN KEY(ref_id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE 
 );
+
+create table compras(
+	idCompra integer primary key auto_increment,
+	pkUser integer,
+    montoTotal double,
+    moneda varchar(20),
+    constraint pkUserKey foreign key(pkUser) references usuario(id_usuario) on delete cascade
+);
+
+create table giffCard(
+	idGCard integer primary key auto_increment,
+	cantidad integer,
+	nombre varchar(100),
+	image varchar(250),
+	precio double,
+	recargo double,
+	total double
+);
+
+alter table giffCard add estado varchar(10);
+
+create table detalleCompra(
+	idDetCom integer primary key auto_increment,
+    subtotal double,
+    pkgCard integer,
+    pkComp integer,
+    constraint pkeyGCard foreign key(pkgCard) references giffCard(idGCard) on delete cascade,
+    constraint pketComp foreign key(pkComp) references compras(idCompra) on delete cascade
+);
+
+create table regalo(
+	idRegalo integer primary key auto_increment,
+    fechaRegalo date,
+    usuarioEmisor int,
+    usuarioReceptor int,
+    constraint pkUs1 foreign key(usuarioEmisor) references usuario(id_usuario) on delete cascade,
+    constraint pkUs2 foreign key(usuarioReceptor) references usuario(id_usuario) on delete cascade
+);
+
+create table detalleRegali(
+	idDetReg integer primary key auto_increment,
+    cantidad integer,
+    pkgRCard integer,
+    pkReg integer,
+    constraint pkeyGRCard foreign key(pkgRCard) references giffCard(idGCard) on delete cascade,
+    constraint pketReg foreign key(pkReg) references regalo(idRegalo) on delete cascade
+);

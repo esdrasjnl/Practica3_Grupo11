@@ -10,6 +10,14 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    localStorage.setItem('username','');
+    localStorage.setItem('nombre','');
+    localStorage.setItem('apellidos','');
+    localStorage.setItem('cui','');
+    localStorage.setItem('clave','');
+    localStorage.setItem('edad','');
+    localStorage.setItem('correo','');
+    localStorage.setItem('Compras','');
   }
 
 }

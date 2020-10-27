@@ -82,9 +82,6 @@ export class RegistroComponent implements OnInit {
     this.datos.correo=this.correo;
     this.datos.ref_id_tipo=this.id_tipo;
 
-
-    console.log(this.datos);
-
     this.service.postRegistro(this.datos)
       .subscribe(
         res => {
@@ -103,6 +100,7 @@ export class RegistroComponent implements OnInit {
   }
 
   limpiar() {
+    this.username = '';
     this.clave = '';
     this.edad = '';
     this.nombre = '';
