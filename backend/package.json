@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "NODE_ENV=test nodemon --exec 'mocha --R min'",
+        "test": "mocha --exit",
         "test-cuc": "cucumber-js",
         "dev": "nodemon backend/index.js"
     },

@@ -21,7 +21,7 @@ module.exports = function(config) {
             fixWebpackSourcePaths: true
         },
         customLaunchers: {
-            ChromeHeadless: {
+            ChromeHeadless: { //configuracion de chromeheadless##
                 base: 'Chrome',
                 flags: [
                     '--headless',
@@ -36,8 +36,8 @@ module.exports = function(config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['ChromeHeadless'],
-        singleRun: true,
+        browsers: ['ChromeHeadless'], // navegador sin interfaz
+        singleRun: true, //para que solo despliegue una vez el navegador.
         restartOnFileChange: true
     });
 };

@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch&display=swap");
+.centrar
+{
+    text-align: center;
+}
+
+.titulo
+{
+    font-family: "Cabin Sketch", cursive;    position: relative;
+    top:150px;
+}
+
+.imagenes
+{
+    position: relative;
+    top:300px;
+}

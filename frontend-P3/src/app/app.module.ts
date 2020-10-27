@@ -23,17 +23,12 @@ import { PrincipalComponent } from './components/principal/principal.component';
     AppComponent,
     RegistroComponent,
     HomeComponent,
-<<<<<<< HEAD
 
     DatosUsuarioComponent,
-
     LoginComponent,
     PrincipalComponent,
- 
-=======
     CompraComponent,
     CarritoComponent
->>>>>>> compra
   ],
   imports: [
     BrowserModule,

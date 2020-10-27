@@ -20,12 +20,12 @@ const routes: Routes = [
   {
     path: 'registro',
     component: RegistroComponent
-<<<<<<< HEAD
+
   }, 
   {
     path: 'perfil',
     component: DatosUsuarioComponent
-=======
+
   },
   {
     path: 'compra',
@@ -34,7 +34,6 @@ const routes: Routes = [
   {
     path: 'carrito', 
     component: CarritoComponent
->>>>>>> compra
   }
   ,
   {

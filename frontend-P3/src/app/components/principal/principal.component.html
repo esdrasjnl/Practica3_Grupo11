@@ -1,21 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-     </button>
- 
-     <div class="collapse navbar-collapse" id="navbarColor01">
-         <ul class="navbar-nav mr-auto">
-             <li class="nav-item">
-                 <a class="nav-link" href="principal">Principal </a>
-             </li>
-             <li class="nav-item">
-                 <a class="nav-link" href="perfil">Perfil</a>
-             </li>
-         </ul>
-         <form class="form-inline my-2 my-lg-0">
-             <button id="cerrar" class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="window.location.href='#'">Cerrar
-                 Sesión</button>
-         </form>
-     </div>
- </nav>
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="principal">Principal </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="perfil">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="compra">Compra</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <a class="nav-link" href="carrito"><img src="./assets/carrito.png" height="60px"></a>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="window.location.href='#'">Cerrar
+                Sesión</button>
+        </form>
+    </div>
+</nav>
+
+<div class="titulo">
+    <div class="centrar">
+        <h1 class="display-3" style="color:#6b8ac4;">GIFTHUB</h1>
+        <h1 class="display-3" style="color:#2c98a0;">Bienvenid@ {{nombre}}</h1>
+    </div>
+</div>
