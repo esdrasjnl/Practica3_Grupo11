@@ -36,3 +36,17 @@ When(/^Doy click en el boton de ingreso$/, {timeout:60 * 8000}, async () => {
 Then(/^Me dirige a la pagina principal$/, {timeout:60 * 8000}, async () => {
   await page.navigateToPrincipal();
 });
+
+When(/^Ingreso mi usuario incorrecto$/, {timeout:60 * 8000}, async () => {
+    const ingreso = element(by.name("cajac"));
+    await ingreso.sendKeys('ejemplo');
+});
+
+When(/^Ingreso mi contraseña inconrrecta$/, {timeout:60 * 8000}, async () => {
+    const ingreso = element(by.name("cajap"));
+    await ingreso.sendKeys('ejemplo');
+});
+
+Then(/^No reedirige a la pagina principal$/, {timeout:60 * 8000}, async () => {
+  });
+
