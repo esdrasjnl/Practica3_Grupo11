@@ -21,6 +21,6 @@ app.get('/', (req, res)=>{
 });
 
 app.use('/api/usuario/',require('./routes/usuario.router'));
-
+app.use('/api/regalo/',require('./routes/regalo.router'));
 //Check connect
 mysqldb.connect();
