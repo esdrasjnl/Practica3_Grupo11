@@ -43,7 +43,11 @@ CREATE TABLE historial(
 
 create table compras(
 	idCompra integer primary key auto_increment,
-	pkUser integer,
+	pkUser integer,    
+    numeroTarjeta int,
+	nombreTarjeta varchar(100),
+    fechaExpTarjeta date,
+    codigoVerifTarjeta int,
     montoTotal double,
     moneda varchar(20),
     constraint pkUserKey foreign key(pkUser) references usuario(id_usuario) on delete cascade
@@ -79,7 +83,7 @@ create table regalo(
     constraint pkUs2 foreign key(usuarioReceptor) references usuario(id_usuario) on delete cascade
 );
 
-create table detalleRegali(
+create table detalleRegalo(
 	idDetReg integer primary key auto_increment,
     cantidad integer,
     pkgRCard integer,
