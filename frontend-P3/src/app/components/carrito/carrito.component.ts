@@ -18,6 +18,7 @@ export class CarritoComponent implements OnInit {
   fecha:string="";
   cvv:string="";
   totalp:string="";
+  tarjetas: any = [];
 
   dato = {
     pkUser: '',
@@ -29,16 +30,7 @@ export class CarritoComponent implements OnInit {
     moneda: ''
   };
 
-  dato1 = {
-    nombreGiftCard: '',
-    imagenGC: '',
-    precio: '',
-    Estado: 'Activo',
-    subtotal: '',
-    cantidad: '',
-    pkUser: '',
-    recargo: ''
-  };
+  
 
   ngOnInit() {
     this.inicio();
@@ -52,6 +44,7 @@ export class CarritoComponent implements OnInit {
       console.log(this.Datos);
     }
   }
+
   tasa: any;
   obtenerTasa() {
     this.service.getTasaCambio()
@@ -145,6 +138,7 @@ export class CarritoComponent implements OnInit {
           if(res.estado == "true")
           {
             alert("SE REALIZO EL PAGO EXITOSAMENTE");
+            this.postGift();
           }
           else
           {
@@ -158,6 +152,34 @@ export class CarritoComponent implements OnInit {
       this.limpiar();
     }
     
+  }
+
+  postGift()
+  {
+    for (let i = 0; i < this.Datos.length; i++) {
+      const dato1 = {
+        nombreGiftCard: '',
+        imagenGC: '',
+        precio: '',
+        Estado: 'Activo',
+        subtotal: '',
+        cantidad: '',
+        pkUser: '',
+        recargo: ''
+      };
+      
+      dato1.nombreGiftCard = this.Datos[i].name;
+      dato1.imagenGC = this.Datos[i].image;
+      dato1.precio = this.Datos[i].precio;
+      dato1.cantidad = this.Datos[i].repite;
+      dato1.pkUser = localStorage.getItem('id');
+      dato1.recargo = this.Datos[i].chargeRate.toString();
+      dato1.subtotal = (this.Datos[i].precio * this.Datos[i].repite).toString();
+
+      this.tarjetas.push(dato1);
+    }
+
+    console.log(this.tarjetas);
   }
 
 
