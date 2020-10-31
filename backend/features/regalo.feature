@@ -1,5 +1,5 @@
 Feature: Regalo_Targeta
-  Se utilizo para verificar que el regalo de las targetas sea correcto
+  Se utilizo para verificar que el regalo de las targetas sea correcto.
 
 Scenario: El usuario necestita saver si su reagalo fue realizado correctamente
     Given El invitado selecciona las targetas que desea regalar 
