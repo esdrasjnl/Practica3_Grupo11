@@ -14,7 +14,7 @@ compraCtrl.insertaCompra = async function (req, res, next) {
         montoTotal: req.body.montoTotal,
         moneda: req.body.moneda
     };
-    let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !!codigoVeriTarjeta || !montoTotal || !numeroTarjeta;
+    let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !codigoVeriTarjeta || !montoTotal || !numeroTarjeta;
     if (validaParametro) {
         return res.json({ 'estado': 'Datos no validos o Faltan datos' });
     } else {
