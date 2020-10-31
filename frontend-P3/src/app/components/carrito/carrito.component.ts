@@ -17,7 +17,7 @@ export class CarritoComponent implements OnInit {
   nombre:string="";
   fecha:string="";
   cvv:string="";
-  selected:string="";
+  totalp:string="";
 
   ngOnInit() {
     this.inicio();
@@ -83,5 +83,10 @@ export class CarritoComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  realizarPago()
+  {
+    console.log(this.totalp);
   }
 }
