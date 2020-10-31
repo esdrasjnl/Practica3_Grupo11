@@ -22,7 +22,7 @@ CREATE TABLE usuario(
 create table compras(
 	idCompra integer primary key auto_increment,
 	pkUser integer,    
-    numeroTarjeta int,
+    numeroTarjeta varchar(16),
 	nombreTarjeta varchar(100),
     fechaExpTarjeta date,
     codigoVerifTarjeta int,
@@ -36,13 +36,13 @@ create table giffCard(
 	nombre varchar(100),
 	image varchar(250),
 	precio double,
-	recargo double,
     estado varchar(10)
 );
 
 create table detalleCompra(
 	idDetCom integer primary key auto_increment,
     cantidad integer,
+    recargo double,
     subtotal double,
     pkgCard integer, 
     pkComp integer,

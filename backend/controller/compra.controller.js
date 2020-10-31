@@ -1,5 +1,6 @@
 const compraCtrl = {};
 const mysqldb = require('../database');
+const router = require('../routes/gifcards.router');
 const usuarioCtrl = require('./usuario.controller');
 
 compraCtrl.insertaCompra = async function (req, res, next) {
@@ -26,56 +27,68 @@ compraCtrl.insertaCompra = async function (req, res, next) {
 }
 
 compraCtrl.insertaDetalleCompra = async function (req, res, next) {
-    let { pkUser , subtotal, pkgCard} = req.body;
+    let { pkUser, cantidad, nombreGifCard, recargo, imagenGC, precio, subtotal, estado } = req.body;
     let idcompra = 0;
-    const sqlorden = `select max(idcompra) as Idcompra from compras where pkUser = ${pkUser }`;
-    mysqldb.connection.query(sqlorden, function (req, results) {
-        idcompra = results[0].Idcompra;
-        console.log(idcompra);
-        console.log(subtotal);
-        console.log(pkgCard);
-        // const detcompraObj = {
-        //     subtotal: req.body.subtotal,
-        //     pkgCard: req.body.pkgCard,
-        //     pkComp: results[0].Idcompra
-        // };
-        let validaParametro = !subtotal || !pkgCard;
-        if (validaParametro) {
-            return res.json({ 'estado': 'Datos no validos o Faltan datos' });
-        } else {
-            const sql = `insert into detalleCompra values (default, ${subtotal}, ${  pkgCard}, ${idcompra})`;
-            //const sql = `insert into detalleCompra set ?`;
-            //-----------------
-            mysqldb.connection.query(sql, error => {
-                if (error) throw error;
-                res.json({ 'estado': 'true' });
+    const validacion = `select count(*) as retorno, idGCard as retorno2 from giffCard where nombre = '${nombreGifCard}' and image = '${imagenGC}' and precio = '${precio}' group by retorno2`;
+    mysqldb.connection.query(validacion, function (err, rows, results) {
+        console.log(rows.length);
+        if (rows.length === 1) {
+            console.log('Registro Compra con detalles');
+            const sqlorden = `select max(idcompra) as Idcompra from compras where pkUser = ${pkUser}`;
+            mysqldb.connection.query(sqlorden, function (req, results3) {
+                idcompra = results3[0].Idcompra;
+                console.log(idcompra);
+                console.log(subtotal);
+                let validaParametro = !subtotal;
+                if (validaParametro) {
+                    return res.json({ 'estado': 'Datos no validos o Faltan datos' });
+                } else {
+                    const sql = `insert into detalleCompra values (default, ${cantidad}, ${recargo}, ${subtotal}, ${rows[0].retorno2}, ${idcompra})`;
+                    mysqldb.connection.query(sql, error => {
+                        if (error) throw error;
+                        res.json({ 'estado': 'true' });
+                    });
+                }
             });
-            //-----------------
+        } else if (rows.length === 0) {
+
+            console.log('Registro de detalles');
+            const sql = 'insert into giffCard set?';
+            const gCardObj = {
+                nombre: req.body.nombreGifCard,
+                image: req.body.imagenGC,
+                precio: req.body.precio,
+                estado: req.body.estado
+
+            };
+            mysqldb.connection.query(sql, gCardObj, error => {
+                if (error) throw error;
+                const validacion = `select count(*) as retorno, idGCard as retorno2 from giffCard where nombre = '${nombreGifCard}' and image = '${imagenGC}' and precio = '${precio}' group by retorno2`;
+                mysqldb.connection.query(validacion, function (err, rows, results) {
+                    if (rows.length === 1) {
+                        console.log('Registro Compra con detalles');
+                        const sqlorden = `select max(idcompra) as Idcompra from compras where pkUser = ${pkUser}`;
+                        mysqldb.connection.query(sqlorden, function (req, results3) {
+                            idcompra = results3[0].Idcompra;
+                            console.log(idcompra);
+                            console.log(subtotal);
+                            let validaParametro = !subtotal;
+                            if (validaParametro) {
+                                return res.json({ 'estado': 'Datos no validos o Faltan datos' });
+                            } else {
+                                const sql = `insert into detalleCompra values (default, ${cantidad}, ${recargo}, ${subtotal}, ${rows[0].retorno2}, ${idcompra})`;
+                                mysqldb.connection.query(sql, error => {
+                                    if (error) throw error;
+                                    res.json({ 'estado': 'true' });
+                                });
+                            }
+                        });
+                    }
+                });
+            });
         }
 
     });
-
-    /*
-    const detcompraObj = {
-        subtotal: req.body.subtotal,
-        pkgCard: req.body.pkgCard,
-        pkComp: idcompra
-    };
-    let validaParametro = !subtotal || !pkgCard;
-    if (validaParametro) {
-        return res.json({ 'estado': 'Datos no validos o Faltan datos' });
-    } else {
-        const sql = 'insert into detalleCompra set?';
-        //-----------------
-        mysqldb.connection.query(sqlorden, function (req, results) {
-            mysqldb.connection.query(sql, detcompraObj, error => {
-                if (error) throw error;
-                res.json({ 'estado': 'true' });
-            });
-        });
-        //-----------------
-    }
-    */
 }
 
 module.exports = compraCtrl;
