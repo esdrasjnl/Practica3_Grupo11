@@ -14,6 +14,6 @@ export class UsuarioService {
 
   getusuario()
     {
-      return this.http.get<any>(`${this.api}/usuario/usuario`);
+      return this.http.get<any>(`${this.api}/usuario/`);
     }
 }

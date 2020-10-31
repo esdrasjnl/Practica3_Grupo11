@@ -38,7 +38,23 @@
             <div>
                 <h3><img src="./assets/grupo.png" height="60px">ELEGIR USUARIO </h3>
             </div>
-
+    
+            <div class="row" >
+                <div *ngFor="let user of users" class="col-3">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
+                        <div class="card-header text-warning">
+                            <h3 class="card-title text-warning">{{user.nombre}}</h3>
+                        </div>
+                
+                        <div class="centrar">
+                              <div>
+                                    <button type="button" id="Regalo" (click)="guardarusuario(user.nombre)"class="btn btn-info">Seleccionar</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </td>
         <td>
             <div>
