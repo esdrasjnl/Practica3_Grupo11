@@ -87,3 +87,9 @@ create table detalleRegali(
     constraint pkeyGRCard foreign key(pkgRCard) references giffCard(idGCard) on delete cascade,
     constraint pketReg foreign key(pkReg) references regalo(idRegalo) on delete cascade
 );
+
+-- script para obtener las compras realizadas por x usuario
+select pkgCard,cantidad,subtotal,numeroTarjeta,nombreTarjeta 
+from detalleCompra
+INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
+where pkUser=2;
