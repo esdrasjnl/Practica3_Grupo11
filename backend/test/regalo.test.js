@@ -132,4 +132,17 @@ describe("Express regalo", async () => {
       }
     });
   });
+  it("TEstListBuyUserDatInvalid request GET /:idUser",(done)=>{
+    request(app.use(regalo))
+    .get("/:")
+    .send("ng")
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
 });
