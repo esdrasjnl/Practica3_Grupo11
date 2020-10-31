@@ -51,6 +51,7 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
     }
 }
 regaloCtrl.getListBuyForUser= async function(req,res){
+    console.log("pasando---------");
     let {iduser}=req.params; //carnet en este caso es id
     let validaParametro=isNaN(iduser) ||iduser==' ';
     if(validaParametro){

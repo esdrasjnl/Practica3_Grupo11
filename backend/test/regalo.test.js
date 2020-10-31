@@ -118,4 +118,18 @@ describe("Express regalo", async () => {
       }
     });
   });
+  //pruebas unitarias para la lista de compras que el usuario ha adquirido
+  it("TestListBuyUsers request GET /:idUser",(done)=>{
+    request(app.use(regalo))
+    .get("/:")
+    .send("2")
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
 });
