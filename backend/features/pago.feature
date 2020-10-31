@@ -1,5 +1,5 @@
 Feature: Realizar_Pago
-  Se utilizo para verificar que el registro sea exitoso
+  Se utilizo para verificar que el registro sea exitoso.
 
 Scenario: El usuario realiza el pago de el carrito de compras
     Given El usuario ingresa a la seccion de pago
