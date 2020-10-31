@@ -76,6 +76,16 @@ export class CarritoComponent implements OnInit {
     }
     return false;
   }
+
+  cvvcorrecto(cvv: string):boolean
+  {
+    if(cvv.length == 3)
+    {
+      return true;
+    }
+    return false;
+  }
+  
   nombreusuario(nombre: string):boolean
   {
     if(nombre!="")
