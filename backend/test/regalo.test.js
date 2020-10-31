@@ -35,7 +35,19 @@ describe("Express regalo", async () => {
         }else{
           done();
         }
-
+      });
+    });
+    it("TestRegaloParameterVacio request /agregar",(done)=>{
+      request(app.use(regalo))
+      .post("/agregar")
+      .send({"fechaRegalo":"2020","usuarioEmisor": " ","usuarioReceptor":" "})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
       });
     });
 
