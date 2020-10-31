@@ -5,5 +5,5 @@ const router =express.Router();
 
 router.post('/agregar',regalo.postRegalo);
 router.post('/agregar/detalle',regalo.postDetalleRegalo);
-router.get('/:carnet',regalo.getListBuyForUser);
+router.get('/:iduser',regalo.getListBuyForUser);
 module.exports=router;
