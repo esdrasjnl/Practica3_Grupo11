@@ -50,4 +50,19 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
         });
     }
 }
+regaloCtrl.getListBuyForUser= async function(req,res){
+    let {carnet}=req.body;
+    let validaParametro=isNan(carnet) || carnet==' ';
+    if(validaParametro){
+        return res.json({"estado":"parametro no valido"});
+    }else{
+        const sql=`select pkgCard,cantidad,subtotal,numeroTarjeta,nombreTarjeta 
+        from detalleCompra
+        INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
+        where pkUser=${carnet}`;
+        mysqldb.connection.query(sql,function(err,results){
+            return res.json(results);
+        });
+    }
+}
 module.exports=regaloCtrl;
