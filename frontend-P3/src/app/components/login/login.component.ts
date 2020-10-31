@@ -93,8 +93,9 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('clave',this.respuesta.clave);
     localStorage.setItem('edad',this.respuesta.edad);
     localStorage.setItem('correo',this.respuesta.correo);
+    localStorage.setItem('id',this.respuesta.id_usuario);
 
-    var u = localStorage.getItem('username');
+    var u = localStorage.getItem('id');
 
     console.log(u);
   }
