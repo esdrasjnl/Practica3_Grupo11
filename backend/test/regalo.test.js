@@ -105,5 +105,17 @@ describe("Express regalo", async () => {
       }
     });
   });
-
+  it("TestDetalleRegaloParametroNoValid request POST /agregar/detalle",(done)=>{
+    request(app.use(regalo))
+    .post("/agregar/detalle")
+    .send({"usuarioEmisor":"df","cantidad":"sdf","pkgRCard":"dfs"})
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
 });
