@@ -33,4 +33,9 @@ export class CompraService {
   {
     return this.http.post<any>(`${this.api1}/compra/agregar`,dato);
   }
+
+  postGift(dato)
+  {
+    return this.http.post<any>(`${this.api1}/compra/agregarDetalle`,dato);
+  }
 }
