@@ -63,5 +63,18 @@ describe("Express regalo", async () => {
         }
       });
     });
+    it("TestRegaloDataNoVali request /agregar",(done)=>{
+      request(app.use(regalo))
+      .post("/agregar")
+      .send({"fechaRegalo":"n","usuarioEmisor":"n","usuarioReceptor":"nm"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
 
 });
