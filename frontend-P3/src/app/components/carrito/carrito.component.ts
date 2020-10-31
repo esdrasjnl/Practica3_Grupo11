@@ -29,6 +29,17 @@ export class CarritoComponent implements OnInit {
     moneda: ''
   };
 
+  dato1 = {
+    nombreGiftCard: '',
+    imagenGC: '',
+    precio: '',
+    Estado: 'Activo',
+    subtotal: '',
+    cantidad: '',
+    pkUser: '',
+    recargo: ''
+  };
+
   ngOnInit() {
     this.inicio();
     this.obtenerTasa();
