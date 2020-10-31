@@ -9,7 +9,7 @@ CREATE TABLE usuario(
 	id_usuario         INTEGER PRIMARY KEY AUTO_INCREMENT,
     user_name 		   VARCHAR(15) NOT NULL,
     correo			   VARCHAR(30) NOT NULL,
-    clave			   VARCHAR(20) NOT NULL,
+    clave			   VARCHAR(100) NOT NULL,
 	nombre             VARCHAR(30) NOT NULL,
     apellido           VARCHAR(60) NOT NULL,
 	CUI            	   VARCHAR(13) UNIQUE,
@@ -24,13 +24,15 @@ create table compras(
 	pkUser integer,    
     numeroTarjeta varchar(16),
 	nombreTarjeta varchar(100),
-    fechaExpTarjeta date,
+    fechaExpTarjeta varchar(20),
     codigoVerifTarjeta int,
     montoTotal double,
     moneda varchar(20),
     constraint pkUserKey foreign key(pkUser) references usuario(id_usuario) on delete cascade
 );
-
+drop table detalleCompra;
+drop table compras;
+select * from compras;
 create table giffCard(
 	idGCard integer primary key auto_increment,
 	nombre varchar(100),

@@ -1,6 +1,7 @@
 const usuarioCtrl = {};
 const mysqldb = require('../database');
 let vari = 0;
+
 usuarioCtrl.postUsuario = async function (req, res, next) {
     let { user_name, correo, clave, nombre, apellido, cui, edad, ref_id_tipo } = req.body;
     console.log(Number.isInteger(vari));
@@ -19,18 +20,21 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
             var existeDato = results[0].retorno;
             console.log(existeDato);
             if (parseInt(existeDato) === 0) {
-                const sql = 'insert into usuario set?';
-                const UsuarioObj = {
-                    user_name: req.body.user_name,
-                    correo: req.body.correo,
-                    clave: req.body.clave,
-                    nombre: req.body.nombre,
-                    apellido: req.body.apellido,
-                    cui: req.body.cui,
-                    edad: req.body.edad,
-                    ref_id_tipo: req.body.ref_id_tipo
-                };
-                mysqldb.connection.query(sql, UsuarioObj, error => {
+                // const sql = 'insert into usuario set?';
+                // const UsuarioObj = {
+                //     user_name: req.body.user_name,
+                //     correo: req.body.correo,
+                //     clave: req.body.clave,
+                //     nombre: req.body.nombre,
+                //     apellido: req.body.apellido,
+                //     cui: req.body.cui,
+                //     edad: req.body.edad,
+                //     ref_id_tipo: req.body.ref_id_tipo
+                // };
+                const sql = `insert into usuario values (default, '${req.body.user_name}',
+                    '${req.body.correo}',md5('${req.body.clave}'),'${req.body.nombre}','${req.body.apellido}','${req.body.cui}','${req.body.edad}',
+                    '${req.body.ref_id_tipo}');`;
+                mysqldb.connection.query(sql, error => {
                     if (error) throw error;
                     //res.send('Usuario Creado');
                     res.json({ 'estado': 'true' });
@@ -80,7 +84,8 @@ usuarioCtrl.loginUsuario = async function (req, res, next) {
     const { user_name, email, clave } = req.body;
     let parametrosValidos = !user_name && !clave || !email && !clave;
     if (!parametrosValidos) {
-        const sql = `select * from usuario where user_name = '${user_name}' and clave = '${clave}' or correo = '${email}' and clave = '${clave}'`;
+        const sql = `select * from usuario where user_name = '${user_name}' and clave = md5('${clave}') or correo = 
+        '${email}' and clave = md5('${clave}')`;
         mysqldb.connection.query(sql, (error, result) => {
             try {
                 if (user_name == "" || clave == "" || email == "") {
