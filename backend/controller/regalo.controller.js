@@ -31,14 +31,22 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
         return res.json({'estado':'datos no validos'});
     }else{
         //obtener id de reaglo
-        const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
-        mysqldb.connection.query(sql,function(req,results){
-            pkReg=results[0].id;
-            const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
-            mysqldb.connection.query(sql2,function(error){
-                if (error) throw error;
-                res.json({ 'estado': 'true' });
-            });
+        const sqlv=`select count(*) as retorno from giffCard where idGCard=${pkgRCard}`;
+        mysqldb.connection.query(sqlv,function(err,resultv){
+            if(resultv[0].retorno==0){
+                return res.json({"estado":"no se encontro tarjeta"})
+            }else{
+                const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
+                mysqldb.connection.query(sql,function(req,results){
+                    pkReg=results[0].id;
+                    const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
+                    mysqldb.connection.query(sql2,function(error){
+                        if (error) throw error;
+                        res.json({ 'estado': 'true' });
+                    });
+                });
+
+            }
         });
     }
 }
