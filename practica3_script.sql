@@ -22,7 +22,7 @@ CREATE TABLE usuario(
 create table compras(
 	idCompra integer primary key auto_increment,
 	pkUser integer,    
-    numeroTarjeta varchar(16),
+    numeroTarjeta varchar(100),
 	nombreTarjeta varchar(100),
     fechaExpTarjeta varchar(20),
     codigoVerifTarjeta int,

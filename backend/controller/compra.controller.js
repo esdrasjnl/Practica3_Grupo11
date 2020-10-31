@@ -5,21 +5,23 @@ const usuarioCtrl = require('./usuario.controller');
 
 compraCtrl.insertaCompra = async function (req, res, next) {
     let { pkUser, numeroTarjeta, nombreTarjeta, fechaExpTarjeta, codigoVeriTarjeta, montoTotal, moneda } = req.body;
-    const compraObj = {
-        pkUser: req.body.pkUser,
-        numeroTarjeta: req.body.numeroTarjeta,
-        nombreTarjeta: req.body.nombreTarjeta,
-        fechaExpTarjeta: req.body.fechaExpTarjeta,
-        codigoVerifTarjeta: req.body.codigoVeriTarjeta,
-        montoTotal: req.body.montoTotal,
-        moneda: req.body.moneda
-    };
+    // const compraObj = {
+        // pkUser: req.body.pkUser,
+        // numeroTarjeta: req.body.numeroTarjeta,
+        // nombreTarjeta: req.body.nombreTarjeta,
+        // fechaExpTarjeta: req.body.fechaExpTarjeta,
+        // codigoVerifTarjeta: req.body.codigoVeriTarjeta,
+        // montoTotal: req.body.montoTotal,
+        // moneda: req.body.moneda
+    // };
     let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !codigoVeriTarjeta || !montoTotal || !numeroTarjeta;
     if (validaParametro) {
         return res.json({ 'estado': 'Datos no validos o Faltan datos' });
     } else {
-        const sql = 'insert into compras set?';
-        mysqldb.connection.query(sql, compraObj, error => {
+        //const sql = 'insert into compras set?';
+        const sql = `insert into compras values (default, ${pkUser}, md5('${numeroTarjeta}'), '${nombreTarjeta}', '${fechaExpTarjeta}', 
+            ${codigoVeriTarjeta}, '${montoTotal}', '${moneda}');`;
+        mysqldb.connection.query(sql, error => {
             if (error) throw error;
             res.json({ 'estado': 'true' });
         });
