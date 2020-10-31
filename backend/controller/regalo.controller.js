@@ -22,4 +22,23 @@ regaloCtrl.postRegalo=async function(req,res,next){
         });
     }
 }
+regaloCtrl.postDetalleRegalo=async function(req,res){
+    let {usuarioEmisor,cantidad,pkgRCard}=req.body;
+    let pkReg=0;
+    let validaParametro=isNaN(cantidad) || isNaN(pkgRCard) || isNaN(usuarioEmisor) || cantidad==' ' || pkgRCard==' ' || usuarioEmisor==' ';
+    if(validaParametro){
+        return res.json({'estado':'datos no validos'});
+    }else{
+        //obtener id de reaglo
+        const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
+        mysqldb.connection.query(sql,function(req,results){
+            pkReg=results[0].id;
+            const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
+            mysqldb.connection.query(sql2,function(error){
+                if (error) throw error;
+                res.json({ 'estado': 'true' });
+            });
+        });
+    }
+}
 module.exports=regaloCtrl;

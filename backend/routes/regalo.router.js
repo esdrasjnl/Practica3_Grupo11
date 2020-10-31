@@ -4,7 +4,6 @@ const router =express.Router();
 
 
 router.post('/agregar',regalo.postRegalo);
-//router.post('agregar/detalle',regalo.postDetalleRegalo);
-//router.get('/',regalo.getIdrealo);
+router.post('/agregar/detalle',regalo.postDetalleRegalo);
 
 module.exports=router;
