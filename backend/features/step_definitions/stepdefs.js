@@ -78,3 +78,30 @@ Then('El usuario accede a GiftHub {string}', function(retornoEsperado) {
     assert.equal(this.estadoActualLogin, retornoEsperado);
 
 });
+
+//------------------------- Para el pago del usuario ---------------------------
+function verificarPagoExitoso(retorno) {
+    if (retorno === "pagado") {
+        return "Pago_realizado";
+    } else {
+        return "Pago_No_realizado";
+    }
+}
+
+Given('El usuario ingresa a la seccion de pago', function() {
+    // Write code here that turns the phrase above into concrete actions
+    //return 'pending';
+    this.retorno = "pagado"
+});
+
+When('Hace clic en el boton de pago', function() {
+    // Write code here that turns the phrase above into concrete actions
+    //return 'pending';
+    this.estadopago = verificarPagoExitoso(this.retorno);
+});
+
+Then('El usuario obtiene el mensaje de su compra {string}', function(retornoEsperado) {
+    // Write code here that turns the phrase above into concrete actions
+    assert.equal(this.estadopago, retornoEsperado);
+
+});
