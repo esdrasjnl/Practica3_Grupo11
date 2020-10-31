@@ -48,11 +48,10 @@ compraCtrl.insertaDetalleCompra = async function (req, res, next) {
             console.log('Registro de detalles');
             const sql = 'insert into giffCard set?';
             const gCardObj = {
-                nombre: req.body.nombreGifCard,
-                image: req.body.imagenGC,
-                precio: req.body.precio,
-                estado: req.body.estado
-
+                nombre: nombreGifCard,
+                image: imagenGC,
+                precio: precio,
+                estado: estado
             };
             mysqldb.connection.query(sql, gCardObj, error => {
                 if (error) throw error;
