@@ -107,8 +107,8 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ELEGIR MONEDA PARA REALIZAR PAGO</label>
                                 <select name="combo" [(ngModel)]="totalp" class="custom-select">
-                                  <option name="moneda" value="${{total | number : '1.2'}}" >${{total | number : '1.2'}}</option>
-                                  <option name="moneda" value="Q{{total * tasa | number : '1.2'}}">Q{{total * tasa | number : '1.2'}}</option>
+                                  <option name="moneda" value="$" >${{total | number : '1.2'}}</option>
+                                  <option name="moneda" value="Q">Q{{total * tasa | number : '1.2'}}</option>
                                 </select>
                               </div>
                         </div>

@@ -19,6 +19,16 @@ export class CarritoComponent implements OnInit {
   cvv:string="";
   totalp:string="";
 
+  dato = {
+    pkUser: '',
+    numeroTarjeta: '',
+    nombreTarjeta: '',
+    fechaExpTarjeta: '',
+    codigoVerifTarjeta: '',
+    montoTotal: '',
+    moneda: ''
+  };
+
   ngOnInit() {
     this.inicio();
     this.obtenerTasa();
@@ -97,6 +107,56 @@ export class CarritoComponent implements OnInit {
 
   realizarPago()
   {
-    console.log(this.totalp);
+    if(this.cvvcorrecto(this.cvv) == true && this.tarjetacorrecta(this.tarjeta) == true && this.totalp.length != 0)
+    {
+      this.dato.pkUser = localStorage.getItem('id');
+      this.dato.numeroTarjeta = this.tarjeta;
+      this.dato.nombreTarjeta = this.nombre;
+      this.dato.fechaExpTarjeta = this.fecha;
+      this.dato.codigoVerifTarjeta = this.cvv;
+      
+
+      if(this.totalp == "Q")
+      {
+        this.dato.moneda = "Quetzales";
+        var t = this.total * this.tasa;
+        this.dato.montoTotal = t.toString();
+      }
+      else{
+        this.dato.moneda = "Dolares";
+        this.dato.montoTotal = this.total.toString();
+      }
+      console.log(this.dato);
+
+      this.service.postPago(this.dato)
+      .subscribe(
+        res => {
+          if(res.estado == "true")
+          {
+            alert("SE REALIZO EL PAGO EXITOSAMENTE");
+          }
+          else
+          {
+            alert("NO SE PUDO REALIZAR EL PAGO");
+          }
+        },
+        err => {
+          console.log(err);
+          alert("NO SE PUEDE REALIZAR EL PAGO");}
+      )
+      this.limpiar();
+    }
+    
+  }
+
+
+  limpiar()
+  {
+    this.tarjeta="";
+    this.nombre="";
+    this.fecha="";
+    this.cvv="";
+    this.totalp="";
   }
 }
+
