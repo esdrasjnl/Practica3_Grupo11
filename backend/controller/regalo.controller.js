@@ -31,14 +31,37 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
         return res.json({'estado':'datos no validos'});
     }else{
         //obtener id de reaglo
-        const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
-        mysqldb.connection.query(sql,function(req,results){
-            pkReg=results[0].id;
-            const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
-            mysqldb.connection.query(sql2,function(error){
-                if (error) throw error;
-                res.json({ 'estado': 'true' });
-            });
+        const sqlv=`select count(*) as retorno from giffCard where idGCard=${pkgRCard}`;
+        mysqldb.connection.query(sqlv,function(err,resultv){
+            if(resultv[0].retorno==0){
+                return res.json({"estado":"no se encontro tarjeta"})
+            }else{
+                const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
+                mysqldb.connection.query(sql,function(req,results){
+                    pkReg=results[0].id;
+                    const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
+                    mysqldb.connection.query(sql2,function(error){
+                        if (error) throw error;
+                        res.json({ 'estado': 'true' });
+                    });
+                });
+
+            }
+        });
+    }
+}
+regaloCtrl.getListBuyForUser= async function(req,res){
+    let {iduser}=req.params; //carnet en este caso es id
+    let validaParametro=isNaN(iduser) ||iduser==' ';
+    if(validaParametro){
+        return res.json({"estado":"parametro no valido"});
+    }else{
+        const sql=`select pkgCard,cantidad,subtotal,numeroTarjeta,nombreTarjeta 
+        from detalleCompra
+        INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
+        where pkUser=${iduser}`;
+        mysqldb.connection.query(sql,function(err,results){
+            return res.json(results);
         });
     }
 }
