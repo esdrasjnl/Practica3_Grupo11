@@ -106,8 +106,8 @@
                         <div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">ELEGIR MONEDA PARA REALIZAR PAGO</label>
-                                <select [ngModel]="selected" class="custom-select" (ngModelChange)="recibirPago($event)">
-                                  <option name="moneda" [ngValue]="pago">${{total | number : '1.2'}}</option>
+                                <select [ngModelOptions]="{standalone:true}" [ngModel]="selected" class="custom-select" (ngModelChange)="recibirPago($event)">
+                                  <option name="moneda" [ngValue]="pago" >${{total | number : '1.2'}}</option>
                                   <option name="moneda" [ngValue]="pago">Q{{total * tasa | number : '1.2'}}</option>
                                 </select>
                               </div>
