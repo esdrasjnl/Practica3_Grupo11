@@ -9,7 +9,6 @@ compraCtrl.insertaCompra = async function (req, res, next) {
     if (validaParametro) {
         return res.json({ 'estado': 'Datos no validos o Faltan datos' });
     } else {
-        //const sql = 'insert into compras set?';
         const sql = `insert into compras values (default, ${pkUser}, md5('${numeroTarjeta}'), '${nombreTarjeta}', '${fechaExpTarjeta}', 
             ${codigoVeriTarjeta}, '${montoTotal}', '${moneda}');`;
         mysqldb.connection.query(sql, error => {
