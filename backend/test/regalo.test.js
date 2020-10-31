@@ -76,5 +76,34 @@ describe("Express regalo", async () => {
         }
       });
     });
+//--------------------------------------------------------------
+//------------------------pruebas detalleRegalo----------------
+//--------------------------------------------------------------
+  it("TestDetalleRegalo request /agregar",(done)=>{
+    request(app.use(regalo))
+    .post("/agregar/detalle")
+    .send({"usuarioEmisor":"3","cantidad":"5","pkgRCard":"1"})
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
+  it("TestDetalleRegaloVacio request /agregar/detalle",(done)=>{
+    request(app.use(regalo))
+    .post("/agregar/detalle")
+    .send({"usuarioEmisor":" ","cantidad":" ","pkgRCard":" "})
+    .expect(200)
+    .end((err,res)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
 
 });
