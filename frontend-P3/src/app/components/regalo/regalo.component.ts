@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from "../../services/usuario.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regalo',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegaloComponent implements OnInit {
 
-  constructor() { }
+  constructor( public router: Router) { }
 
   ngOnInit() {
   }
+
+
 
 }

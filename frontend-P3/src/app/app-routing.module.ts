@@ -4,12 +4,10 @@ import {HomeComponent} from "./components/home/home.component";
 import { RegistroComponent } from './components/registro/registro.component';
 import {CompraComponent} from "./components/compra/compra.component";
 import {CarritoComponent} from "./components/carrito/carrito.component";
-
 import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.component';
-
-
 import { LoginComponent } from './components/login/login.component';
 import {PrincipalComponent} from './components/principal/principal.component'
+import {RegaloComponent} from './components/regalo/regalo.component'
 
 
 const routes: Routes = [
@@ -45,9 +43,11 @@ const routes: Routes = [
     path: 'principal',
     component: PrincipalComponent
   }
-  
-  
-  
+  ,  
+  {
+    path: 'regalo',
+    component: RegaloComponent
+  }
 ];
 
 @NgModule({
