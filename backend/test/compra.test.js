@@ -27,5 +27,17 @@ describe("pruebas unitarias para compras", async () => {
           }
          });
     });
-
+    it("TesttCompraDatoInvalid request POST /agregar",(done)=>{
+      request(app.use(compra))
+      .post("/agregar")
+      .send({"pkUser": "2","numeroTarjeta":"sd","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "2020-09-12","codigoVerifTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
 });
