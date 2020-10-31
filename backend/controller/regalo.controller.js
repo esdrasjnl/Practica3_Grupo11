@@ -51,15 +51,15 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
     }
 }
 regaloCtrl.getListBuyForUser= async function(req,res){
-    let {carnet}=req.params;
-    let validaParametro=isNaN(carnet) ||carnet==' ';
+    let {iduser}=req.params; //carnet en este caso es id
+    let validaParametro=isNaN(iduser) ||iduser==' ';
     if(validaParametro){
         return res.json({"estado":"parametro no valido"});
     }else{
         const sql=`select pkgCard,cantidad,subtotal,numeroTarjeta,nombreTarjeta 
         from detalleCompra
         INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
-        where pkUser=${carnet}`;
+        where pkUser=${iduser}`;
         mysqldb.connection.query(sql,function(err,results){
             return res.json(results);
         });
