@@ -110,5 +110,15 @@ usuarioCtrl.loginUsuario = async function (req, res, next) {
         return res.json({ 'Msg': 'Datos insuficientes para el login' });   
     }
 }
-
+usuarioCtrl.getUsers=async function(req,res){
+    const sql = `select * from usuario`;
+    mysqldb.connection.query(sql, (error, result) => {
+        if (error) throw error;
+        if (result.length > 0) {
+            res.json(result);
+        } else {
+            res.send('No hay resultados');
+        }
+    });
+}
 module.exports = usuarioCtrl;
