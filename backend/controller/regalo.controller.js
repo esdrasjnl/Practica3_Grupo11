@@ -51,8 +51,8 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
     }
 }
 regaloCtrl.getListBuyForUser= async function(req,res){
-    let {carnet}=req.body;
-    let validaParametro=isNan(carnet) || carnet==' ';
+    let {carnet}=req.params;
+    let validaParametro=isNaN(carnet) ||carnet==' ';
     if(validaParametro){
         return res.json({"estado":"parametro no valido"});
     }else{
