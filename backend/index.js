@@ -14,7 +14,6 @@ app.use(cors());
 app.listen(PORT, ()=>{
     console.log(`Servidor Corriendo en el puerto ${PORT}`);
 });
-
 //Route
 app.get('/', (req, res)=>{
     res.send('SAOP API');

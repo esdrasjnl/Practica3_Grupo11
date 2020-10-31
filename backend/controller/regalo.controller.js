@@ -7,6 +7,7 @@ regaloCtrl.postRegalo=async function(req,res,next){
         usuarioEmisor:req.body.usuarioEmisor,
         usuarioReceptor:req.body.usuarioReceptor
     }
+    
     let {fechaRegalo,usuarioEmisor,usuarioReceptor}=req.body;
     //--validaciones de parametros 
     let fechaValida=/^\d{2,4}\-\d{1,2}\-\d{1,2}$/    
