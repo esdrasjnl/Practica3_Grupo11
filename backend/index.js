@@ -22,5 +22,6 @@ app.get('/', (req, res)=>{
 
 app.use('/api/usuario/',require('./routes/usuario.router'));
 app.use('/api/compra/',require('./routes/compras.router'));
+app.use('/api/gifcard/',require('./routes/gifcards.router'));
 //Check connect
 mysqldb.connect();
