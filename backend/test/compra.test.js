@@ -40,4 +40,17 @@ describe("pruebas unitarias para compras", async () => {
         }
       });
     });
+    it("TestCompraDateNotValid request POST /agregar",(done)=>{
+      request(app.use(compra))
+      .post("/agregar")
+      .send({"pkUser": "2","numeroTarjeta":"5","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "sdf","codigoVerifTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
 });
