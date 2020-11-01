@@ -139,7 +139,7 @@ describe("pruebas unitarias para compras", async () => {
       .send({
         "nombreGifCard":"prueba",
         "imagenGC": "image.png",
-        "precio": "hola",
+        "precio": "12",
         "Estado": "Activo",
         "subtotal": "3.322",
         "cantidad": "-5",
