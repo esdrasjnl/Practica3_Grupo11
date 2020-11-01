@@ -68,4 +68,22 @@ regaloCtrl.getListBuyForUser= async function(req,res){
         });
     }
 }
+regaloCtrl.getListUserReceptor=async function(req,res){
+    let {userReceptor}=req.params;
+    let validaParametro=isNaN(userReceptor) || userReceptor==' ';
+    if(validaParametro){
+        return res.json({"estado":"parametro invalido"});
+    }else{
+        const sql=`select giffCard.nombre,giffCard.image,cantidad,regalo.fechaRegalo
+        from detalleRegalo 
+        INNER JOIN regalo ON detalleRegalo.pkReg=regalo.idRegalo
+        INNER JOIN giffCard ON detalleRegalo.pkgRCard=giffCard.idGCard
+        WHERE regalo.usuarioReceptor=${userReceptor}
+        GROUP BY giffCard.precio,giffCard.nombre,giffCard.image,cantidad,regalo.fechaRegalo`;
+        mysqldb.connection.query(sql,function(err,results){
+            return res.json(results);
+        });
+    }
+
+}
 module.exports=regaloCtrl;
