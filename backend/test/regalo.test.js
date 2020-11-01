@@ -172,5 +172,17 @@ describe("Express regalo", async () => {
       }
     });
   });
-
+  it("TestListRegaloParemeterNoValido request GET /receptor/:userReceptor",(done)=>{
+    request(app.use(regalo))
+    .get("/receptor/:")
+    .send("xd")
+    .expect(200)
+    .end((err,result)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
 });
