@@ -83,6 +83,7 @@ compraCtrl.insertaDetalleCompra = async function (req, res, next) {
                                     if (validaParametro) {
                                         return res.json({ 'estado': 'Datos no validos o Faltan datos' });
                                     } else {
+                                        const insHist = `insert into historial values (default, '${nombreGifCard}',${cantidad},'${imagenGC}',${precio},'Comprado', ${pkUser})`;
                                         const sql = `insert into detalleCompra values (default, ${cantidad}, ${recargo}, ${subtotal}, ${rows[0].retorno2}, ${idcompra})`;
                                         mysqldb.connection.query(sql, error => {
                                             if (error) throw error;
