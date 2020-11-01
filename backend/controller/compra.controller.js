@@ -5,16 +5,20 @@ const usuarioCtrl = require('./usuario.controller');
 
 compraCtrl.insertaCompra = async function (req, res, next) {
     let { pkUser, numeroTarjeta, nombreTarjeta, fechaExpTarjeta, codigoVeriTarjeta, montoTotal, moneda } = req.body;
-    let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !codigoVeriTarjeta || !montoTotal || !numeroTarjeta;
+    let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !codigoVeriTarjeta || !montoTotal || !numeroTarjeta ||  isNaN(montoTotal);
     if (validaParametro) {
         return res.json({ 'estado': 'Datos no validos o Faltan datos' });
     } else {
-        const sql = `insert into compras values (default, ${pkUser}, md5('${numeroTarjeta}'), '${nombreTarjeta}', '${fechaExpTarjeta}', 
+        if (isNaN(numeroTarjeta) || isNaN(codigoVeriTarjeta) || isNaN(montoTotal)) {
+            res.json({ 'estado': 'Revise el No de tarjeta, el codigo de verificacion o el monto total' });
+        } else {
+            const sql = `insert into compras values (default, ${pkUser}, md5('${numeroTarjeta}'), '${nombreTarjeta}', '${fechaExpTarjeta}', 
             ${codigoVeriTarjeta}, '${montoTotal}', '${moneda}');`;
-        mysqldb.connection.query(sql, error => {
-            if (error) throw error;
-            res.json({ 'estado': 'true' });
-        });
+            mysqldb.connection.query(sql, error => {
+                if (error) throw error;
+                res.json({ 'estado': 'true' });
+            });
+        }
     }
 }
 
@@ -42,10 +46,15 @@ compraCtrl.insertaDetalleCompra = async function (req, res, next) {
                         if (validaParametro) {
                             return res.json({ 'estado': 'Datos no validos o Faltan datos' });
                         } else {
+                            const insHist = `insert into historial values (default, '${nombreGifCard}',${cantidad},'${imagenGC}',${precio},'Comprado', ${pkUser})`;
                             const sql = `insert into detalleCompra values (default, ${cantidad}, ${recargo}, ${subtotal}, ${rows[0].retorno2}, ${idcompra})`;
                             mysqldb.connection.query(sql, error => {
                                 if (error) throw error;
-                                res.json({ 'estado': 'true' });
+                                mysqldb.connection.query(insHist, error => {
+                                    if (error) throw error;
+                                    res.json({ 'estado': 'true' });
+                                });
+                                //res.json({ 'estado': 'true' });
                             });
                         }
                     });

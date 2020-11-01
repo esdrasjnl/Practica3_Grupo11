@@ -30,9 +30,7 @@ create table compras(
     moneda varchar(20),
     constraint pkUserKey foreign key(pkUser) references usuario(id_usuario) on delete cascade
 );
-drop table detalleCompra;
-drop table compras;
-select * from compras;
+
 create table giffCard(
 	idGCard integer primary key auto_increment,
 	nombre varchar(100),
@@ -69,3 +67,22 @@ create table detalleRegalo(
     constraint pkeyGRCard foreign key(pkgRCard) references giffCard(idGCard) on delete cascade,
     constraint pketReg foreign key(pkReg) references regalo(idRegalo) on delete cascade
 );
+
+create table historial(
+		idHistorial integer primary key auto_increment,
+        nombreGC varchar(20),
+        cantidadGC integer,
+		image varchar(250),
+		precio double,
+		estado varchar(10),
+        pkusuario int,
+        constraint fkusr foreign key(pkusuario) references usuario(id_usuario) on delete cascade
+);
+
+-- Consulta para historial
+select nombreGC, image, precio, (Comprados - Regalados) as Disponibles from (select Tabla.nombreGC, Tabla.image, Tabla.precio, 
+(select sum(cantidadGC) from historial where pkusuario = 3 and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Comprado') 
+as Comprados,
+(select sum(cantidadGC) from historial where pkusuario = 3 and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Regalado')
+as Regalados
+from (select distinct nombreGC, image, precio, estado from historial) as Tabla group by nombreGC, image, precio, Comprados, Regalados) as Disp;
