@@ -56,7 +56,7 @@ regaloCtrl.getListBuyForUser= async function(req,res){
     if(validaParametro){
         return res.json({"estado":"parametro no valido"});
     }else{
-        const sql=`select pkgCard,giffCard.image,nombreTarjeta,cantidad,subtotal,numeroTarjeta 
+        const sql=`select pkgCard,giffCard.image,giffCard.nombre,cantidad,subtotal 
         from detalleCompra
         INNER JOIN giffCard ON detalleCompra.pkgCard=giffCard.idGCard
         INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
