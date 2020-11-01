@@ -26,7 +26,7 @@ regaloCtrl.postRegalo=async function(req,res,next){
 regaloCtrl.postDetalleRegalo=async function(req,res){
     let {usuarioEmisor,cantidad,pkgRCard}=req.body;
     let pkReg=0;
-    let validaParametro=isNaN(cantidad) || isNaN(pkgRCard) || isNaN(usuarioEmisor) || cantidad==' ' || pkgRCard==' ' || usuarioEmisor==' ';
+    let validaParametro=isNaN(cantidad) || isNaN(pkgRCard) || isNaN(usuarioEmisor) || cantidad==' ' || pkgRCard==' ' || usuarioEmisor==' ' || cantidad<0;
     if(validaParametro){
         return res.json({'estado':'datos no validos'});
     }else{
