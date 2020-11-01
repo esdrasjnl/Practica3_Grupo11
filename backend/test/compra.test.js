@@ -111,4 +111,26 @@ describe("pruebas unitarias para compras", async () => {
         }
       });
     });
+    it("TestCompraDetalleDatNovalidCantidad request POST /agregar", (done)=>{
+      request(app.use(compra))
+      .post("/agregarDetalle")
+      .send({
+        "nombreGifCard":"prueba",
+        "imagenGC": "image.png",
+        "precio": "hola",
+        "Estado": "Activo",
+        "subtotal": "3.322",
+        "cantidad": "xd",
+        "pkUser": "2",
+        "recargo": "12.43"
+      })
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
 });
