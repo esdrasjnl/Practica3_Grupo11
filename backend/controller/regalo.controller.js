@@ -26,7 +26,7 @@ regaloCtrl.postRegalo=async function(req,res,next){
 regaloCtrl.postDetalleRegalo=async function(req,res){
     let {usuarioEmisor,cantidad,pkgRCard}=req.body;
     let pkReg=0;
-    let validaParametro=isNaN(cantidad) || isNaN(pkgRCard) || isNaN(usuarioEmisor) || cantidad==' ' || pkgRCard==' ' || usuarioEmisor==' ' || cantidad<0;
+    let validaParametro=isNaN(cantidad) || isNaN(pkgRCard) || isNaN(usuarioEmisor) || cantidad==' ' || pkgRCard==' ' || usuarioEmisor==' ';
     if(validaParametro){
         return res.json({'estado':'datos no validos'});
     }else{
@@ -36,13 +36,23 @@ regaloCtrl.postDetalleRegalo=async function(req,res){
             if(resultv[0].retorno==0){
                 return res.json({"estado":"no se encontro tarjeta"})
             }else{
-                const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
-                mysqldb.connection.query(sql,function(req,results){
-                    pkReg=results[0].id;
-                    const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
-                    mysqldb.connection.query(sql2,function(error){
-                        if (error) throw error;
-                        res.json({ 'estado': 'true' });
+                //obtener datos de gifCard que se regala
+                const giffCard=`select * from giffCard where idGCard=${pkgRCard}`;
+                mysqldb.connection.query(giffCard,function(err,resultf){
+                    
+                    //insertar historial
+                    const insHist = `insert into historial values (default, '${resultf[0].nombre}',${cantidad},'${resultf[0].image}',${resultf[0].precio},'Regalado', ${usuarioEmisor})`;
+                    mysqldb.connection.query(insHist,function(){
+                        //se ha insertd historial
+                        const sql=`select max(idRegalo) as id from regalo where usuarioEmisor=${usuarioEmisor}`;
+                        mysqldb.connection.query(sql,function(req,results){
+                            pkReg=results[0].id;
+                            const sql2=`insert into detalleRegalo values (default, ${cantidad}, ${pkgRCard}, ${pkReg})`;
+                            mysqldb.connection.query(sql2,function(error){
+                                if (error) throw error;
+                                res.json({ 'estado': 'true' });
+                            });
+                        });
                     });
                 });
 
@@ -56,13 +66,13 @@ regaloCtrl.getListBuyForUser= async function(req,res){
     if(validaParametro){
         return res.json({"estado":"parametro no valido"});
     }else{
-        const sql=`select pkgCard,giffCard.image,giffCard.nombre,cantidad,giffCard.precio,subtotal 
-        from detalleCompra
-        INNER JOIN giffCard ON detalleCompra.pkgCard=giffCard.idGCard
-        INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
-        INNER JOIN usuario ON compras.pkUser=usuario.id_usuario
-        where pkUser=${iduser}
-        GROUP BY giffCard.precio,pkgCard,giffCard.image,giffCard.nombre,cantidad,subtotal`;
+        const sql=`select (select idGCard from giffCard where nombre = Disp.nombreGC and image = Disp.image and precio = Disp.precio) as IdGifCard, nombreGC, image, precio, if((Comprados - Regalados) is null,comprados,(Comprados-Regalados))as Disponibles from (select Tabla.nombreGC, Tabla.image, Tabla.precio, 
+            (select sum(cantidadGC) from historial where pkusuario =${iduser} and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Comprado') 
+            as Comprados,
+            (select sum(cantidadGC) from historial where pkusuario =${iduser} and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Regalado')
+            as Regalados
+            from (select distinct nombreGC, image, precio, estado from historial) as Tabla group by nombreGC, image, precio, Comprados, Regalados) as Disp;
+            `;
         mysqldb.connection.query(sql,function(err,results){
             return res.json(results);
         });
