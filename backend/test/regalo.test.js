@@ -158,4 +158,19 @@ describe("Express regalo", async () => {
       }
     });
   });
+  //-------------------pruebas de visualizacion de rgalo a receptor--------
+  it("TestListRegalo request GET /receptor/:userReceptor",(done)=>{
+    request(app.use(regalo))
+    .get("/receptor/:")
+    .send("5")
+    .expect(200)
+    .end((err,result)=>{
+      if(err){
+        done(err);
+      }else{
+        done();
+      }
+    });
+  });
+
 });
