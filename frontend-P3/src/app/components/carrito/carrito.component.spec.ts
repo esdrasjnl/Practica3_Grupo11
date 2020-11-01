@@ -61,7 +61,7 @@ describe('CarritoComponent', () => {
 
   describe('VERIFICAR NOMBRE', () => {
     it('Comprobacion nombre', function () {
-      expect(component.nombreusuario('MARCOS ')).toBeTruthy();
+      expect(component.nombreusuario('ejemplo')).toBeTruthy();
     });
     it('Comprobacion nombre  Fallido', function () {
       expect(component.nombreusuario('')).toBeFalsy();
