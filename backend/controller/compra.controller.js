@@ -5,7 +5,7 @@ const usuarioCtrl = require('./usuario.controller');
 
 compraCtrl.insertaCompra = async function (req, res, next) {
     let { pkUser, numeroTarjeta, nombreTarjeta, fechaExpTarjeta, codigoVeriTarjeta, montoTotal, moneda } = req.body;
-    let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !codigoVeriTarjeta || !montoTotal || !numeroTarjeta;
+    let validaParametro = !pkUser || !moneda || !nombreTarjeta || !fechaExpTarjeta || !codigoVeriTarjeta || !montoTotal || !numeroTarjeta ||  isNaN(montoTotal);
     if (validaParametro) {
         return res.json({ 'estado': 'Datos no validos o Faltan datos' });
     } else {
