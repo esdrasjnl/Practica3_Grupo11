@@ -113,4 +113,38 @@ describe('LoginComponent', () => {
     });
   });
 
+  describe('MOCKS PARA LOGIN CORRECTO', () => {
+    it('Enviar Datos Correctos', function () {
+      const datos = {
+        user_name:'ese',
+        clave:'123'
+      };
+
+      var s = new LoginComponent(component.service, component.router);
+      spyOn(s, 'loguear').and.callFake(function()
+      {
+        return true;
+      });
+      s.loguear(datos);
+      expect(s.loguear(datos)).toBeTruthy();
+    });
+
+    it('Enviar Datos Correctos', function () {
+      const datos = {
+        user_name:'ese',
+        clave:'123'
+      };
+
+      var s = new LoginComponent(component.service, component.router);
+      spyOn(s, 'loguear').and.callFake(function()
+      {
+        return false;
+      });
+      s.loguear(datos);
+      expect(s.loguear(datos)).toBeFalsy();
+    });
+
+  });
+
 });
+
