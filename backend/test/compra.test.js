@@ -69,7 +69,7 @@ describe("pruebas unitarias para compras", async () => {
     //------------------pruebas unitarias sobre detalleCompra------------
     it("TestCompraDetalle request POST /agregar", (done)=>{
       request(app.use(compra))
-      .post("/agregar")
+      .post("/agregarDetalle")
       .send({
         "nombreGifCard":"prueba",
         "imagenGC": "image.png",
@@ -79,7 +79,7 @@ describe("pruebas unitarias para compras", async () => {
         "cantidad": "2",
         "pkUser": "2",
         "recargo": "12.43"
-    })
+      })
       .expect(200)
       .end((err,res)=>{
         if(err){
@@ -87,7 +87,28 @@ describe("pruebas unitarias para compras", async () => {
         }else{
           done();
         }
-
+      });
+    });
+    it("TestCompraDetalleDatNovalid request POST /agregar", (done)=>{
+      request(app.use(compra))
+      .post("/agregarDetalle")
+      .send({
+        "nombreGifCard":"prueba",
+        "imagenGC": "image.png",
+        "precio": "hola",
+        "Estado": "Activo",
+        "subtotal": "3.322",
+        "cantidad": "2",
+        "pkUser": "2",
+        "recargo": "12.43"
+      })
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
       });
     });
 });
