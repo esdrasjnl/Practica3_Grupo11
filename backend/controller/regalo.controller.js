@@ -56,12 +56,13 @@ regaloCtrl.getListBuyForUser= async function(req,res){
     if(validaParametro){
         return res.json({"estado":"parametro no valido"});
     }else{
-        const sql=`select pkgCard,giffCard.image,giffCard.nombre,cantidad,subtotal 
+        const sql=`select pkgCard,giffCard.image,giffCard.nombre,cantidad,giffCard.precio,subtotal 
         from detalleCompra
         INNER JOIN giffCard ON detalleCompra.pkgCard=giffCard.idGCard
         INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
         INNER JOIN usuario ON compras.pkUser=usuario.id_usuario
-        where pkUser=${iduser}`;
+        where pkUser=${iduser}
+        GROUP BY giffCard.precio,pkgCard,giffCard.image,giffCard.nombre,cantidad,subtotal`;
         mysqldb.connection.query(sql,function(err,results){
             return res.json(results);
         });
