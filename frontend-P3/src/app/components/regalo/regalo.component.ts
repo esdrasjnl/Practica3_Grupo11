@@ -53,6 +53,7 @@ export class RegaloComponent implements OnInit {
           CUI: res[i].CUI,
           edad: res[i].edad,
           ref_id_tipo: res[i].ref_id_tipo
+         
         }
         this.users[j] = usuarios;
         j++;
@@ -89,7 +90,8 @@ export class RegaloComponent implements OnInit {
           image: res[i].image,
           nombreTarjeta: res[i].nombre,
           pkgCard: res[i].pkgCard,
-          subtotal:res[i].subtotal
+          subtotal:res[i].subtotal,
+          precio: res[i].precio
         }
         this.cards[j] = card;
         j++;
@@ -137,7 +139,7 @@ export class RegaloComponent implements OnInit {
       )
       this.limpiar();
   }
-  
+
 
   detalle(tarjeta,emisor,cantidad) {
     const datos={
