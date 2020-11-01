@@ -16,7 +16,7 @@ describe("pruebas unitarias para compras", async () => {
     it("TestpotCompra POST request /agregar", (done) => {
       request(app.use(compra))
         .post("/agregar")
-        .send({"pkUser": "2","numeroTarjeta":"2131234321234567","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "2020-09-12","codigoVerifTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
+        .send({"pkUser": "2","numeroTarjeta":"2131234321234567","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "2020-09-12","codigoVeriTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
         .expect(200)
          .end( (err,res)=>{
          console.log(res.body);
@@ -30,7 +30,7 @@ describe("pruebas unitarias para compras", async () => {
     it("TesttCompraDatoInvalid request POST /agregar",(done)=>{
       request(app.use(compra))
       .post("/agregar")
-      .send({"pkUser": "2","numeroTarjeta":"sd","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "2020-09-12","codigoVerifTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
+      .send({"pkUser": "2","numeroTarjeta":"sd","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "2020-09-12","codigoVeriTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
       .expect(200)
       .end((err,res)=>{
         if(err){
@@ -43,7 +43,20 @@ describe("pruebas unitarias para compras", async () => {
     it("TestCompraDateNotValid request POST /agregar",(done)=>{
       request(app.use(compra))
       .post("/agregar")
-      .send({"pkUser": "2","numeroTarjeta":"5","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "sdf","codigoVerifTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
+      .send({"pkUser": "2","numeroTarjeta":"5","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "sdf","codigoVeriTarjeta":"123","montoTotal":"34","moneda":"quetzales"})
+      .expect(200)
+      .end((err,res)=>{
+        if(err){
+          done(err);
+        }else{
+          done();
+        }
+      });
+    });
+    it("TestCompraMontoInvalido request POST /agregar",(done)=>{
+      request(app.use(compra))
+      .post("/agregar")
+      .send({"pkUser": "2","numeroTarjeta":"5","nombreTarjeta":"tarjeta1","fechaExpTarjeta": "sdf","codigoVeriTarjeta":"123","montoTotal":"ms","moneda":"quetzales"})
       .expect(200)
       .end((err,res)=>{
         if(err){
