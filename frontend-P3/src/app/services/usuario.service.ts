@@ -16,4 +16,18 @@ export class UsuarioService {
     {
       return this.http.get<any>(`${this.api}/usuario/`);
     }
+
+    gettarjetas(id)
+    {
+      return this.http.get<any>(`${this.api}/regalo/${id}`);
+    }
+
+    enviardatos(datos:any){
+      console.log(datos);
+      return this.http.post<any>(`${this.api}/regalo/agregar`,datos);
+    }
+    enviardetalle(detalle:any){
+      console.log(detalle);
+      return this.http.post<any>(`${this.api}/regalo/agregar/detalle`,detalle);
+    }
 }

@@ -48,21 +48,51 @@
                 
                         <div class="centrar">
                               <div>
-                                    <button type="button" id="Regalo" (click)="guardarusuario(user.nombre)"class="btn btn-info">Seleccionar</button>
+                                    <button type="button" id="Regalo" (click)="guardarusuario(user.id_usuario)"class="btn btn-info">Seleccionar</button>
                                 </div>
                             
                         </div>
                     </div>
                 </div>
             </div>
-        </td>
-        <td>
-            <div>
-                <h3><img src="./assets/gift.png" height="60px">ELEGIR GIFT </h3>
-            </div>
-            
+
+
         </td>
     </tr>
+<tr>
+
+    <td>
+        <div>
+            <h3><img src="./assets/gift.png" height="60px">ELEGIR GIFT </h3>
+        </div>
+        
+        <div class="row" >
+            <div *ngFor="let card of cards" class="col-3">
+                <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
+                    <div class="card-header text-warning">
+                        <h3 class="card-title text-warning">{{card.nombreTarjeta}}</h3>
+                    </div>
+                    <div class="card-body" style="text-align: center">
+                        <img src="{{card.image}}" width="70" height="70">
+                    </div>
+                    <div class="centrar">
+                      <input name="cajac"  type="text" id="defaultRegisterFormFirstName" [(ngModel)]="cantidad" 
+                            class="centrar" placeholder="Cantidad a regalar" style=" max-width: 10rem;">
+                    </div>
+                    <div class="centrar">
+                        <h5> Cantidad: {{card.cantidad}}</h5>
+                        </div>
+                    <div class="centrar">
+                          <div>
+                                <button type="button" id="Tarj" (click)="guardardatos(card.pkgCard,card.cantidad)" class="btn btn-info">Regalar</button>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
 </table>
 
 <div class="row" >
