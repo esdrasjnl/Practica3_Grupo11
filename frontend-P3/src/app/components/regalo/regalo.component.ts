@@ -16,6 +16,8 @@ export class RegaloComponent implements OnInit {
   users: any = [];
   cards: any = [];
   cantidad:string="";
+  res:string="";
+  res2:string="";
   ngOnInit() {
     this.obtenerusuarios();
     this.obtenertarjetas();
@@ -23,7 +25,7 @@ export class RegaloComponent implements OnInit {
 
   }
   
-  usuarioregalo:string;
+  usuarioregalo:number;
   giftcard:string;
   obtenerusuarios() {
     this.service.getusuario()
@@ -51,6 +53,7 @@ export class RegaloComponent implements OnInit {
           CUI: res[i].CUI,
           edad: res[i].edad,
           ref_id_tipo: res[i].ref_id_tipo
+         
         }
         this.users[j] = usuarios;
         j++;
@@ -87,7 +90,8 @@ export class RegaloComponent implements OnInit {
           image: res[i].image,
           nombreTarjeta: res[i].nombre,
           pkgCard: res[i].pkgCard,
-          subtotal:res[i].subtotal
+          subtotal:res[i].subtotal,
+          precio: res[i].precio
         }
         this.cards[j] = card;
         j++;
@@ -99,21 +103,70 @@ export class RegaloComponent implements OnInit {
   guardardatos(id:any,cantidadtotal:any){
     
     const usuarioreceptor=localStorage.getItem("id_usuario");
-    
+   // var usuarioreceptor = Number(usu);
     var f = new Date();
     var fecha= f.getFullYear()+"-"+(f.getMonth()+1)+"-"+f.getDate();
-    console.log(f.toLocaleDateString());
-
+    this.agregar(fecha,this.usuarioregalo+"",usuarioreceptor,this.cantidad,id);
+   /* console.log(f.toLocaleDateString());
     console.log(f.getFullYear());
     console.log(f.getDate());
     console.log(f.getMonth());
-
     console.log(fecha);
     console.log(this.usuarioregalo);
     console.log(usuarioreceptor);
     console.log(this.cantidad);
-    console.log(id);
+    console.log(id);*/
+
    }
  
+   agregar(fecha,emisor,receptor,cantidad,idtarjeta) {
+    const datos={
+      "fechaRegalo":fecha,
+      "usuarioEmisor":emisor,
+      "usuarioReceptor":receptor
+  }
+    this.service.enviardatos(datos)
+      .subscribe(
+        res => {
+          console.log(res);
+          if(res.estado=="true"){
+            this.detalle(idtarjeta,receptor,cantidad);
+          }else{
+            alert("NO SE PUDO REALIZAR EL REGALO!")
+          }
+        },
+        err => console.log(err)
+      )
+      this.limpiar();
+  }
+
+
+  detalle(tarjeta,emisor,cantidad) {
+    const datos={
+      "usuarioEmisor":emisor,
+      "cantidad":cantidad,
+      "pkgRCard":tarjeta
+  }
+  
+    this.service.enviardetalle(datos)
+      .subscribe(
+        res => {
+          if(res.estado=="true"){
+            alert("REGALO ENVIADO!")
+          }else{
+            alert("NO SE PUDO REALIZAR EL REGALO!")
+          }
+        },
+        err => console.log(err)
+      )
+      this.limpiar();
+  }
+
+  limpiar(){
+    this.cantidad="";
+    this.res="";
+    this.res2="";
+    this.usuarioregalo=null;
+  }
 
 }
