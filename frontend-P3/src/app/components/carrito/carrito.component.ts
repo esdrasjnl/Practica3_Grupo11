@@ -138,7 +138,7 @@ export class CarritoComponent implements OnInit {
           if(res.estado == "true")
           {
             alert("SE REALIZO EL PAGO EXITOSAMENTE");
-            //this.Gift();
+            this.Gift();
           }
           else
           {
