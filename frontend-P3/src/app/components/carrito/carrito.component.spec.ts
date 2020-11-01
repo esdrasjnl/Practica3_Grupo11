@@ -67,4 +67,13 @@ describe('CarritoComponent', () => {
       expect(component.nombreusuario('')).toBeFalsy();
     });
   });
+
+  describe('MOCKS PARA OBTENER TASA DE CAMBIO', () => {
+    it('Mock para comprobar tasa de cambio', function () {
+      var s = new CarritoComponent(component.service, component.router);
+      spyOn(s, 'obtenerTasa').and.callThrough();
+      component.obtenerTasa();
+      expect(component.tasa).not.toEqual(0);
+    });
+  });
 });
