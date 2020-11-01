@@ -25,7 +25,7 @@ export class CarritoComponent implements OnInit {
     numeroTarjeta: '',
     nombreTarjeta: '',
     fechaExpTarjeta: '',
-    codigoVerifTarjeta: '',
+    codigoVeriTarjeta: '',
     montoTotal: '',
     moneda: ''
   };
@@ -117,28 +117,28 @@ export class CarritoComponent implements OnInit {
       this.dato.numeroTarjeta = this.tarjeta;
       this.dato.nombreTarjeta = this.nombre;
       this.dato.fechaExpTarjeta = this.fecha;
-      this.dato.codigoVerifTarjeta = this.cvv;
+      this.dato.codigoVeriTarjeta = this.cvv;
       
 
       if(this.totalp == "Q")
       {
         this.dato.moneda = "Quetzales";
         var t = this.total * this.tasa;
-        this.dato.montoTotal = t.toString();
+        this.dato.montoTotal = (Math.round((t + Number.EPSILON) * 100) / 100).toString();
       }
       else{
         this.dato.moneda = "Dolares";
-        this.dato.montoTotal = this.total.toString();
+        this.dato.montoTotal = (Math.round((this.total + Number.EPSILON) * 100) / 100).toString();
       }
-      console.log(this.dato);
-
+      
       this.service.postPago(this.dato)
       .subscribe(
         res => {
+          console.log(res);
           if(res.estado == "true")
           {
             alert("SE REALIZO EL PAGO EXITOSAMENTE");
-            this.postGift();
+            //this.Gift();
           }
           else
           {
@@ -154,11 +154,11 @@ export class CarritoComponent implements OnInit {
     
   }
 
-  postGift()
+  Gift()
   {
     for (let i = 0; i < this.Datos.length; i++) {
       const dato1 = {
-        nombreGiftCard: '',
+        nombreGifCard: '',
         imagenGC: '',
         precio: '',
         Estado: 'Activo',
@@ -168,7 +168,7 @@ export class CarritoComponent implements OnInit {
         recargo: ''
       };
       
-      dato1.nombreGiftCard = this.Datos[i].name;
+      dato1.nombreGifCard = this.Datos[i].name;
       dato1.imagenGC = this.Datos[i].image;
       dato1.precio = this.Datos[i].precio;
       dato1.cantidad = this.Datos[i].repite;
@@ -180,6 +180,23 @@ export class CarritoComponent implements OnInit {
     }
 
     console.log(this.tarjetas);
+    this.postGift();
+
+  }
+
+  postGift()
+  {
+    for (let i = 0; i < this.tarjetas.length; i++) {
+      this.service.postGift(this.tarjetas[i])
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => console.log(err)
+      )
+    }
+    this.tarjetas =  [];
+    
   }
 
 
