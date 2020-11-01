@@ -80,7 +80,8 @@ create table historial(
 );
 
 -- Consulta para historial
-select (select idGCard from giffCard where nombre = Disp.nombreGC and image = Disp.image and precio = Disp.precio) as IdGifCard, nombreGC, image, precio, (Comprados - Regalados) as Disponibles from (select Tabla.nombreGC, Tabla.image, Tabla.precio, 
+select (select idGCard from giffCard where nombre = Disp.nombreGC and image = Disp.image and precio = Disp.precio) as IdGifCard, nombreGC, image, precio, 
+if((Comprados - Regalados) is null,comprados,(Comprados-Regalados)) as Disponibles from (select Tabla.nombreGC, Tabla.image, Tabla.precio, 
 (select sum(cantidadGC) from historial where pkusuario = 3 and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Comprado') 
 as Comprados,
 (select sum(cantidadGC) from historial where pkusuario = 3 and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Regalado')
