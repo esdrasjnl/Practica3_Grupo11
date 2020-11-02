@@ -58,8 +58,12 @@ export class RegaloComponent implements OnInit {
           ref_id_tipo: res[i].ref_id_tipo
          
         }
-        this.users[j] = usuarios;
-        j++;
+        if(usuarios.id_usuario != localStorage.getItem("id_usuario"))
+        {
+          this.users[j] = usuarios;
+          j++;
+        }
+        
     }
     return this.users;
   }
