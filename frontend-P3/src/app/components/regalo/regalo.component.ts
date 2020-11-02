@@ -58,8 +58,12 @@ export class RegaloComponent implements OnInit {
           ref_id_tipo: res[i].ref_id_tipo
          
         }
-        this.users[j] = usuarios;
-        j++;
+        if(usuarios.id_usuario != localStorage.getItem("id_usuario"))
+        {
+          this.users[j] = usuarios;
+          j++;
+        }
+        
     }
     return this.users;
   }
@@ -124,7 +128,7 @@ export class RegaloComponent implements OnInit {
     {
       alert("NO SE PUEDE REGALAR UN NUMERO MENOR QUE 1!")
     }else{  
-       this.agregar(fecha,this.usuarioregalo+"",usuarioreceptor,this.cantidad,id);
+       this.agregar(fecha,usuarioreceptor+"",this.usuarioregalo,this.cantidad,id);
       }
    /* console.log(f.toLocaleDateString());
     console.log(f.getFullYear());
@@ -149,7 +153,7 @@ export class RegaloComponent implements OnInit {
         res => {
           console.log(res);
           if(res.estado=="true"){
-            this.detalle(idtarjeta,receptor,cantidad);
+            this.detalle(idtarjeta,emisor,cantidad);
           }else{
             alert("NO SE PUDO REALIZAR EL REGALO !")
           }
