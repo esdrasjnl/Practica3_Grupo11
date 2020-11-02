@@ -79,7 +79,7 @@ Then('El usuario accede a GiftHub {string}', function(retornoEsperado) {
 
 });
 
-<<<<<<< HEAD
+
 //------------------------- Para el Regalo de tarjetas ---------------------------
 function funcRegalarTargetas(retorno) {
     if (retorno === "Regalo correcto") {
@@ -104,7 +104,8 @@ When('Se confirma a traves de clic en el boton que procede a regalar', function(
 Then('El usuario transfiere sus tarjetas de regalo {string}', function(retornoEsperado) {
     // Write code here that turns the phrase above into concrete actions
     assert.equal(this.estadoRegalo, retornoEsperado);
-=======
+});
+
 //------------------------- Para el pago del usuario ---------------------------
 function verificarPagoExitoso(retorno) {
     if (retorno === "pagado") {
@@ -129,6 +130,6 @@ When('Hace clic en el boton de pago', function() {
 Then('El usuario obtiene el mensaje de su compra {string}', function(retornoEsperado) {
     // Write code here that turns the phrase above into concrete actions
     assert.equal(this.estadopago, retornoEsperado);
->>>>>>> pago
+
 
 });
