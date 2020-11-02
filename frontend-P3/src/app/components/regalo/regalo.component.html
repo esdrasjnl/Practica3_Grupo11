@@ -28,13 +28,17 @@
 </nav>
 
 <table style="margin: 0 auto;">
+    <tr>
+        <td>
     <div class="form-group">
         <p class="text-warning"></p>
         <h4 class="p-3 mb-2 bg-warning text-dark">REGALAR GIFT CARDS</h4>
     </div>
+</td>
+    </tr>
     <tr>
         <td>
-           
+        
             <div>
                 <h3><img src="./assets/grupo.png" height="60px">ELEGIR USUARIO </h3>
             </div>
@@ -43,7 +47,7 @@
                 <div *ngFor="let user of users" class="col-3">
                     <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
                         <div class="card-header text-warning">
-                            <h3 class="card-title text-warning">{{user.nombre}}</h3>
+                            <h3 class="card-title text-warning">{{user.user_name}}</h3>
                         </div>
                 
                         <div class="centrar">
@@ -90,10 +94,43 @@
                         </div>
                     <div class="centrar">
                           <div>
-                                <button type="button" id="Tarj" (click)="guardardatos(card.pkgCard,card.cantidad)" class="btn btn-info">Regalar</button>
+                                <button type="button" id="Tarj" (click)="guardardatos(card.pkgCard,card.cantidad)" class="btn btn-success">Regalar</button>
                             </div>
                         
                     </div>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+
+<tr>
+
+    <td>
+        <div>
+            <h3><img src="./assets/recibir.png" height="80px">REGALOS OBTENIDOS</h3>
+        </div>
+        
+        <div class="row" >
+            <div *ngFor="let card of cards1" class="col-3">
+                <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
+                    <div class="card-header text-warning">
+                        <h3 class="card-title text-warning">{{card.nombreTarjeta}}</h3>
+                    </div>
+                    <div class="card-body" style="text-align: center">
+                        <img src="{{card.image}}" width="70" height="70">
+                    </div>
+                
+                    <div class="centrar">
+                        <h5> Cantidad: {{card.cantidad}}</h5>
+                        </div>
+                        <div class="centrar">
+                            <button type="button" id="prec" class="btn btn-warning">fecha: {{card.fecha}}</button>
+                        </div>
+                        <div class="centrar">
+                            <h5></h5>
+                        </div>
+
                 </div>
             </div>
         </div>

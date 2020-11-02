@@ -15,12 +15,15 @@ export class RegaloComponent implements OnInit {
 
   users: any = [];
   cards: any = [];
+  cards1: any = [];
   cantidad:string="";
+  cantidad1:string="";
   res:string="";
   res2:string="";
   ngOnInit() {
     this.obtenerusuarios();
     this.obtenertarjetas();
+    this.obtenerregalos();
     console.log(this.users);
 
   }
@@ -82,19 +85,24 @@ export class RegaloComponent implements OnInit {
 
   llenargift(res: any) {
     let j = 0;
+    console.log(res);
     for (let i = 0; i < res.length; i++) {
-
-        const card =
-        {
-          cantidad: res[i].cantidad,
-          image: res[i].image,
-          nombreTarjeta: res[i].nombre,
-          pkgCard: res[i].pkgCard,
-          subtotal:res[i].subtotal,
-          precio: res[i].precio
+  
+       
+        if(res[i].Disponibles>0){
+          const card =
+          {
+            cantidad: res[i].Disponibles,
+            image: res[i].image,
+            nombreTarjeta: res[i].nombreGC,
+            pkgCard: res[i].IdGifCard,
+            precio: res[i].precio
+          }
+          this.cards[j] = card;
+          j++;
         }
-        this.cards[j] = card;
-        j++;
+    
+       
     }
     return this.cards;
   }
@@ -102,11 +110,22 @@ export class RegaloComponent implements OnInit {
 
   guardardatos(id:any,cantidadtotal:any){
     
+    var y:number=+cantidadtotal;
+    var x:number=+this.cantidad;
+
     const usuarioreceptor=localStorage.getItem("id_usuario");
    // var usuarioreceptor = Number(usu);
     var f = new Date();
     var fecha= f.getFullYear()+"-"+(f.getMonth()+1)+"-"+f.getDate();
-    this.agregar(fecha,this.usuarioregalo+"",usuarioreceptor,this.cantidad,id);
+ 
+    if(x>y){
+      alert("NO HAY SUFICIENTES GIFT PARA REGALAR!")
+    }else if (x<=0)
+    {
+      alert("NO SE PUEDE REGALAR UN NUMERO MENOR QUE 1!")
+    }else{  
+       this.agregar(fecha,this.usuarioregalo+"",usuarioreceptor,this.cantidad,id);
+      }
    /* console.log(f.toLocaleDateString());
     console.log(f.getFullYear());
     console.log(f.getDate());
@@ -132,7 +151,7 @@ export class RegaloComponent implements OnInit {
           if(res.estado=="true"){
             this.detalle(idtarjeta,receptor,cantidad);
           }else{
-            alert("NO SE PUDO REALIZAR EL REGALO!")
+            alert("NO SE PUDO REALIZAR EL REGALO !")
           }
         },
         err => console.log(err)
@@ -168,5 +187,39 @@ export class RegaloComponent implements OnInit {
     this.res2="";
     this.usuarioregalo=null;
   }
+
+
+
+  obtenerregalos() {
+    const id=localStorage.getItem("id_usuario");
+    console.log(id);
+    this.service.getregalos(id)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.llenargift1(res);
+        },
+        err => console.log(err)
+      )
+  }
+
+  llenargift1(res: any) {
+    let j = 0;
+    for (let i = 0; i < res.length; i++) {
+      if(res[i].cantidad>0){
+        const card =
+        {
+          cantidad: res[i].cantidad,
+          image: res[i].image,
+          nombreTarjeta: res[i].nombre,
+          fecha: res[i].fechaRegalo
+        }
+        this.cards1[j] = card;
+        j++;
+      }
+    }
+    return this.cards1;
+  }
+  
 
 }

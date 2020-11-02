@@ -30,4 +30,10 @@ export class UsuarioService {
       console.log(detalle);
       return this.http.post<any>(`${this.api}/regalo/agregar/detalle`,detalle);
     }
+    getregalos(id)
+    {
+      return this.http.get<any>(`${this.api}/regalo/receptor/${id}`);
+    }
+
+
 }
