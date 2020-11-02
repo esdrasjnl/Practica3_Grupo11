@@ -6,5 +6,5 @@ const usuario=require('../controller/usuario.controller');
 router.post('/agregar',usuario.postUsuario);
 router.get('/obtenerMiUsuario', usuarioCtrl.getUsuario);
 router.post('/login', usuario.loginUsuario);
-
+router.get('/',usuario.getUsers);
 module.exports=router;

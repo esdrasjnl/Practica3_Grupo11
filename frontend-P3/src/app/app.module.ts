@@ -14,6 +14,7 @@ import { DatosUsuarioComponent } from './components/datos-usuario/datos-usuario.
 
 import { LoginComponent } from './components/login/login.component';
 import { PrincipalComponent } from './components/principal/principal.component';
+import { RegaloComponent } from './components/regalo/regalo.component';
 
 
 
@@ -28,7 +29,8 @@ import { PrincipalComponent } from './components/principal/principal.component';
     LoginComponent,
     PrincipalComponent,
     CompraComponent,
-    CarritoComponent
+    CarritoComponent,
+    RegaloComponent
   ],
   imports: [
     BrowserModule,

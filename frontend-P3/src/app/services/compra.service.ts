@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 })
 export class CompraService {
   api = 'https://my-json-server.typicode.com/CoffeePaw/AyD1API';
+  api1 = 'http://localhost:4000/api';
 
   constructor(
     private http: HttpClient
@@ -26,5 +27,15 @@ export class CompraService {
   setdatos(user: any) {
     let user_string = JSON.stringify(user);
     localStorage.setItem('Compras', user_string);
+  }
+
+  postPago(dato)
+  {
+    return this.http.post<any>(`${this.api1}/compra/agregar`,dato);
+  }
+
+  postGift(dato)
+  {
+    return this.http.post<any>(`${this.api1}/compra/agregarDetalle`,dato);
   }
 }

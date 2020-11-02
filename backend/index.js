@@ -14,13 +14,17 @@ app.use(cors());
 app.listen(PORT, ()=>{
     console.log(`Servidor Corriendo en el puerto ${PORT}`);
 });
-
 //Route
 app.get('/', (req, res)=>{
     res.send('SAOP API');
 });
 
 app.use('/api/usuario/',require('./routes/usuario.router'));
+
+app.use('/api/regalo/',require('./routes/regalo.router'));
+
+app.use('/api/compra/',require('./routes/compras.router'));
+app.use('/api/gifcard/',require('./routes/gifcards.router'));
 
 //Check connect
 mysqldb.connect();

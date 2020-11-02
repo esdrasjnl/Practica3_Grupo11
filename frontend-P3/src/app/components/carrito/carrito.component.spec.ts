@@ -24,4 +24,56 @@ describe('CarritoComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  describe('Verifica que el costo total sea un numero mayor que 0', () => {
+    it('verifica que el total de un numero mayor o igual ', function () {
+      const Datos1:any=[{
+        'chargeRate': 0.1,
+        'image': "https://mojolika.com/wp-content/uploads/2019/04/196.png",
+        'name': "Steam",
+        'precio': "25",
+        'repite': 1
+      },
+      ];;
+      component.Datos=Datos1;
+      component.user_string='us';
+      expect(component.PagoTotal()).toBeTruthy();
+
+    });
+
+    it('verifica que el total de un numero mayor a 0 fallida ', function () {
+      component.Datos=[];
+       expect(component.PagoTotal()).toBeFalsy();
+ 
+     });
+  });
+
+
+  describe('VERIFICAR NUMERO DE TARJETA', () => {
+    it('Comprobacion tarjeta', function () {
+    expect(component.tarjetacorrecta('1234567891234567')).toBeTruthy();
+    });
+    it('Comprobacion tarjeta FALLIDA', function () {
+      expect(component.tarjetacorrecta('22323')).toBeFalsy();
+    });
+  });
+
+
+  describe('VERIFICAR NOMBRE', () => {
+    it('Comprobacion nombre', function () {
+      expect(component.nombreusuario('ejemplo')).toBeTruthy();
+    });
+    it('Comprobacion nombre  Fallido', function () {
+      expect(component.nombreusuario('')).toBeFalsy();
+    });
+  });
+
+  describe('MOCKS PARA OBTENER TASA DE CAMBIO', () => {
+    it('Mock para comprobar tasa de cambio', function () {
+      var s = new CarritoComponent(component.service, component.router);
+      spyOn(s, 'obtenerTasa').and.callThrough();
+      component.obtenerTasa();
+      expect(component.tasa).not.toEqual(0);
+    });
+  });
 });
