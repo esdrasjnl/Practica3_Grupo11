@@ -84,19 +84,21 @@ export class CarritoComponent implements OnInit {
 
   tarjetacorrecta(tarjeta: string):boolean
   {
-    if(tarjeta.length == 16)
+    if(tarjeta.length == 16 && Number(tarjeta)>0)
     {
       return true;
     }
+    alert("EL CAMPO DE NÚMERO TARJETA CONTIENE ERROR");
     return false;
   }
 
   cvvcorrecto(cvv: string):boolean
   {
-    if(cvv.length == 3)
+    if(cvv.length == 3 && Number(cvv)>0)
     {
       return true;
     }
+    alert("EL CAMPO DE CVV CONTIENE ERROR");
     return false;
   }
   
@@ -106,12 +108,30 @@ export class CarritoComponent implements OnInit {
     {
       return true;
     }
+    alert("EL CAMPO DE NOMBRE PRESENTA ERRORES");
+    return false;
+  }
+
+  verificarFecha()
+  {
+    if(this.fecha[2] != "/")
+    {
+      alert("FECHA DE EXPIRACIÓN DEBE DE TENER EL FORMATO MM/YY");
+      return false;
+    }
+    var veri = this.fecha.split("/", 2); 
+    if(Number(veri[0]) >= 1 && Number(veri[0]) <= 12 && Number(veri[1]) >= 20 && Number(veri[1]) <= 40)
+    {
+      console.log(this.fecha);
+      return true;
+    }
+    alert("FECHA DE EXPIRACIÓN CONTIENE VALORES FUERA DEL RANGO");
     return false;
   }
 
   realizarPago()
   {
-    if(this.cvvcorrecto(this.cvv) == true && this.tarjetacorrecta(this.tarjeta) == true && this.total > 0)
+    if(this.cvvcorrecto(this.cvv) == true && this.tarjetacorrecta(this.tarjeta) == true && this.total > 0 && this.verificarFecha() == true && this.nombreusuario(this.nombre) == true && this.totalp != "")
     {
       this.dato.pkUser = localStorage.getItem('id');
       this.dato.numeroTarjeta = this.tarjeta;
