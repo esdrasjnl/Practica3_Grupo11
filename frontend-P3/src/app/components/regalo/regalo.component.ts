@@ -221,5 +221,41 @@ export class RegaloComponent implements OnInit {
     return this.cards1;
   }
   
+  Validarcantidad():boolean
+  {
+    if(+this.cantidad>0)
+    {
+      return true;
+    }
+    return false;
+  }
 
+  Validarusuarioreceptor():boolean
+  {
+    if(+this.usuarioregalo>0)
+    {
+      return true;
+    }
+    return false;
+  }
+
+  Validardatosregalo(datos1:any):boolean{
+    const fecha = /^[0-9]{4}[-]{1}[0-9]{2}[-]{1}[0-9]{2}$/;
+    const id = /^[0-9]+$/;
+  if(fecha.test(datos1.fechaRegalo+"")&&id.test(datos1.usuarioEmisor+"")&&id.test(datos1.usuarioReceptor+""))
+    {
+      return true;
+    }
+    return false;
+  }
+
+  Validardatostarjetaregalada(datos1:any):boolean{
+    const numero = /^[0-9]+$/;
+
+  if(numero.test(datos1.usuarioEmisor+"")&&numero.test(datos1.cantidad+"")&&numero.test(datos1.pkgRCard+""))
+    {
+      return true;
+    }
+    return false;
+  }
 }
