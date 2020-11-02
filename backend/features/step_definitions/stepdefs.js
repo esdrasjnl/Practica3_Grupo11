@@ -78,3 +78,30 @@ Then('El usuario accede a GiftHub {string}', function(retornoEsperado) {
     assert.equal(this.estadoActualLogin, retornoEsperado);
 
 });
+
+//------------------------- Para el Regalo de tarjetas ---------------------------
+function funcRegalarTargetas(retorno) {
+    if (retorno === "Regalo correcto") {
+        return "Transaccion_Regalo_Correcta";
+    } else {
+        return "Transaccion_Regalo_Erronea";
+    }
+}
+
+Given('El invitado selecciona las targetas que desea regalar', function() {
+    // Write code here that turns the phrase above into concrete actions
+    //return 'pending';
+    this.retorno = "Regalo correcto"
+});
+
+When('Se confirma a traves de clic en el boton que procede a regalar', function() {
+    // Write code here that turns the phrase above into concrete actions
+    //return 'pending';
+    this.estadoRegalo = funcRegalarTargetas(this.retorno);
+});
+
+Then('El usuario transfiere sus tarjetas de regalo {string}', function(retornoEsperado) {
+    // Write code here that turns the phrase above into concrete actions
+    assert.equal(this.estadoRegalo, retornoEsperado);
+
+});

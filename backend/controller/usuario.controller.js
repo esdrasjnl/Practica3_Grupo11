@@ -7,7 +7,6 @@ usuarioCtrl.postUsuario = async function (req, res, next) {
     let parametrosValidos = !user_name || !correo || !nombre || !apellido || isNaN(cui) || isNaN(cui) || !ref_id_tipo;
     if (parametrosValidos) {
         return res.json({ 'Msg': 'Faltan Datos' });
-        //console.log(req.body.carnet);
     } else {
         const validacion = `select count(*) as retorno from usuario where correo = '${req.body.correo}' or user_name = '${req.body.user_name}' or cui = ${cui}`;
         //var existeDato = 0;
@@ -111,5 +110,15 @@ usuarioCtrl.loginUsuario = async function (req, res, next) {
         return res.json({ 'Msg': 'Datos insuficientes para el login' });   
     }
 }
-
+usuarioCtrl.getUsers=async function(req,res){
+    const sql = `select * from usuario`;
+    mysqldb.connection.query(sql, (error, result) => {
+        if (error) throw error;
+        if (result.length > 0) {
+            res.json(result);
+        } else {
+            res.send('No hay resultados');
+        }
+    });
+}
 module.exports = usuarioCtrl;

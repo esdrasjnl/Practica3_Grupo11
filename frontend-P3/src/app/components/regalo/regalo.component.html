@@ -1,0 +1,144 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="principal">Principal </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="perfil">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="compra">Compra</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="regalo">Regalo</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <a class="nav-link" href="regalo"><img src="./assets/regalo.png" height="60px"></a>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" onclick="window.location.href='#'">Cerrar
+                Sesión</button>
+        </form>
+    </div>
+</nav>
+
+<table style="margin: 0 auto;">
+    <tr>
+        <td>
+    <div class="form-group">
+        <p class="text-warning"></p>
+        <h4 class="p-3 mb-2 bg-warning text-dark">REGALAR GIFT CARDS</h4>
+    </div>
+</td>
+    </tr>
+    <tr>
+        <td>
+        
+            <div>
+                <h3><img src="./assets/grupo.png" height="60px">ELEGIR USUARIO </h3>
+            </div>
+    
+            <div class="row" >
+                <div *ngFor="let user of users" class="col-3">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
+                        <div class="card-header text-warning">
+                            <h3 class="card-title text-warning">{{user.user_name}}</h3>
+                        </div>
+                
+                        <div class="centrar">
+                              <div>
+                                    <button type="button" id="Regalo" (click)="guardarusuario(user.id_usuario)"class="btn btn-info">Seleccionar</button>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </td>
+    </tr>
+<tr>
+
+    <td>
+        <div>
+            <h3><img src="./assets/card1.png" height="80px">ELEGIR GIFT CARD </h3>
+        </div>
+        
+        <div class="row" >
+            <div *ngFor="let card of cards" class="col-3">
+                <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
+                    <div class="card-header text-warning">
+                        <h3 class="card-title text-warning">{{card.nombreTarjeta}}</h3>
+                    </div>
+                    <div class="card-body" style="text-align: center">
+                        <img src="{{card.image}}" width="70" height="70">
+                    </div>
+                    <div class="centrar">
+                      <input type="text"  [(ngModel)]="cantidad" 
+                            class="centrar" placeholder="Cantidad a regalar" style=" max-width: 10rem;">
+                    </div>
+                    <div class="centrar">
+                        <h5> Cantidad: {{card.cantidad}}</h5>
+                        </div>
+                        <div class="centrar">
+                            <button type="button" id="prec" class="btn btn-warning">${{card.precio}}</button>
+                        </div>
+                        <div class="centrar">
+                            <h5></h5>
+                        </div>
+                    <div class="centrar">
+                          <div>
+                                <button type="button" id="Tarj" (click)="guardardatos(card.pkgCard,card.cantidad)" class="btn btn-success">Regalar</button>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+
+<tr>
+
+    <td>
+        <div>
+            <h3><img src="./assets/recibir.png" height="80px">REGALOS OBTENIDOS</h3>
+        </div>
+        
+        <div class="row" >
+            <div *ngFor="let card of cards1" class="col-3">
+                <div class="card text-white bg-primary mb-3" style="max-width: 50rem;" >
+                    <div class="card-header text-warning">
+                        <h3 class="card-title text-warning">{{card.nombreTarjeta}}</h3>
+                    </div>
+                    <div class="card-body" style="text-align: center">
+                        <img src="{{card.image}}" width="70" height="70">
+                    </div>
+                
+                    <div class="centrar">
+                        <h5> Cantidad: {{card.cantidad}}</h5>
+                        </div>
+                        <div class="centrar">
+                            <button type="button" id="prec" class="btn btn-warning">fecha: {{card.fecha}}</button>
+                        </div>
+                        <div class="centrar">
+                            <h5></h5>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+</table>
+
+<div class="row" >
+   
+
+</div>
