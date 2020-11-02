@@ -9,7 +9,7 @@ CREATE TABLE usuario(
 	id_usuario         INTEGER PRIMARY KEY AUTO_INCREMENT,
     user_name 		   VARCHAR(15) NOT NULL,
     correo			   VARCHAR(30) NOT NULL,
-    clave			   VARCHAR(20) NOT NULL,
+    clave			   VARCHAR(100) NOT NULL,
 	nombre             VARCHAR(30) NOT NULL,
     apellido           VARCHAR(60) NOT NULL,
 	CUI            	   VARCHAR(13) UNIQUE,
@@ -19,31 +19,13 @@ CREATE TABLE usuario(
 	CONSTRAINT fk_tipo  FOREIGN KEY(ref_id_tipo) REFERENCES tipo_usuario(id_tipo) ON DELETE CASCADE 
 );
 
-CREATE TABLE tarjeta_credito(
-	id_tarjeta			INTEGER PRIMARY KEY,
-	num_tarjeta			VARCHAR(16) NOT NULL,
-    nombre				VARCHAR(50) NOT NULL,
-    fecha				VARCHAR(10) NOT NULL,
-    codigo				INTEGER NOT NULL,
-    monto_pago			INTEGER NOT NULL,
-    moneda				VARCHAR(10) NOT NULL,
-    ref_id_usuario		INTEGER NOT NULL,
-    
-    CONSTRAINT fk_usuario  FOREIGN KEY(ref_id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE 
-);
-
-CREATE TABLE historial(
-	id_historia			INTEGER PRIMARY KEY AUTO_INCREMENT,
-    nombre				VARCHAR(20),
-    imagen				VARCHAR(100),
-    estado				INTEGER,
-    ref_id_usuario		INTEGER NOT NULL,
-    CONSTRAINT fk_usuario_historial  FOREIGN KEY(ref_id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE 
-);
-
 create table compras(
 	idCompra integer primary key auto_increment,
-	pkUser integer,
+	pkUser integer,    
+    numeroTarjeta varchar(100),
+	nombreTarjeta varchar(100),
+    fechaExpTarjeta varchar(20),
+    codigoVerifTarjeta int,
     montoTotal double,
     moneda varchar(20),
     constraint pkUserKey foreign key(pkUser) references usuario(id_usuario) on delete cascade
@@ -51,20 +33,18 @@ create table compras(
 
 create table giffCard(
 	idGCard integer primary key auto_increment,
-	cantidad integer,
 	nombre varchar(100),
 	image varchar(250),
 	precio double,
-	recargo double,
-	total double
+    estado varchar(10)
 );
-
-alter table giffCard add estado varchar(10);
 
 create table detalleCompra(
 	idDetCom integer primary key auto_increment,
+    cantidad integer,
+    recargo double,
     subtotal double,
-    pkgCard integer,
+    pkgCard integer, 
     pkComp integer,
     constraint pkeyGCard foreign key(pkgCard) references giffCard(idGCard) on delete cascade,
     constraint pketComp foreign key(pkComp) references compras(idCompra) on delete cascade
@@ -79,7 +59,7 @@ create table regalo(
     constraint pkUs2 foreign key(usuarioReceptor) references usuario(id_usuario) on delete cascade
 );
 
-create table detalleRegali(
+create table detalleRegalo(
 	idDetReg integer primary key auto_increment,
     cantidad integer,
     pkgRCard integer,
@@ -88,8 +68,30 @@ create table detalleRegali(
     constraint pketReg foreign key(pkReg) references regalo(idRegalo) on delete cascade
 );
 
+<<<<<<< HEAD
 -- script para obtener las compras realizadas por x usuario
 select pkgCard,cantidad,subtotal,numeroTarjeta,nombreTarjeta 
 from detalleCompra
 INNER JOIN compras ON detalleCompra.idDetCom=compras.idCompra
 where pkUser=2;
+=======
+create table historial(
+		idHistorial integer primary key auto_increment,
+        nombreGC varchar(20),
+        cantidadGC integer,
+		image varchar(250),
+		precio double,
+		estado varchar(10),
+        pkusuario int,
+        constraint fkusr foreign key(pkusuario) references usuario(id_usuario) on delete cascade
+);
+
+-- Consulta para historial
+select (select idGCard from giffCard where nombre = Disp.nombreGC and image = Disp.image and precio = Disp.precio) as IdGifCard, nombreGC, image, precio, 
+if((Comprados - Regalados) is null,comprados,(Comprados-Regalados)) as Disponibles from (select Tabla.nombreGC, Tabla.image, Tabla.precio, 
+(select sum(cantidadGC) from historial where pkusuario = 3 and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Comprado') 
+as Comprados,
+(select sum(cantidadGC) from historial where pkusuario = 3 and nombreGC = Tabla.nombreGC and image = Tabla.image and precio = Tabla.precio and estado = 'Regalado')
+as Regalados
+from (select distinct nombreGC, image, precio, estado from historial) as Tabla group by nombreGC, image, precio, Comprados, Regalados) as Disp;
+>>>>>>> pago

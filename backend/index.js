@@ -20,6 +20,11 @@ app.get('/', (req, res)=>{
 });
 
 app.use('/api/usuario/',require('./routes/usuario.router'));
+<<<<<<< HEAD
 app.use('/api/regalo/',require('./routes/regalo.router'));
+=======
+app.use('/api/compra/',require('./routes/compras.router'));
+app.use('/api/gifcard/',require('./routes/gifcards.router'));
+>>>>>>> pago
 //Check connect
 mysqldb.connect();
