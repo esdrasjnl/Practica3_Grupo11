@@ -111,7 +111,7 @@ export class CarritoComponent implements OnInit {
 
   realizarPago()
   {
-    if(this.cvvcorrecto(this.cvv) == true && this.tarjetacorrecta(this.tarjeta) == true && this.totalp.length != 0)
+    if(this.cvvcorrecto(this.cvv) == true && this.tarjetacorrecta(this.tarjeta) == true && this.total > 0)
     {
       this.dato.pkUser = localStorage.getItem('id');
       this.dato.numeroTarjeta = this.tarjeta;
@@ -149,6 +149,11 @@ export class CarritoComponent implements OnInit {
           console.log(err);
           alert("NO SE PUEDE REALIZAR EL PAGO");}
       )
+      this.limpiar();
+    }
+    else if(this.total <= 0)
+    {
+      alert("NO HA SELECCIONADO NINGUNA GIFTCARD");
       this.limpiar();
     }
     
